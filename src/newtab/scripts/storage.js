@@ -1,3 +1,1 @@
-(function () {
-    var
-})();
+export default 'hello, world';

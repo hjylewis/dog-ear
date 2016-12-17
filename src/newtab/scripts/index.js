@@ -1,1 +1,3 @@
-console.log("hello");
+import storage from './storage';
+
+console.log(storage);

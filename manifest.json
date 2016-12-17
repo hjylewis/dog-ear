@@ -10,7 +10,7 @@
     "browser_action": {
         "default_icon": {},
         "default_title": "dog ear this tab",
-        "default_popup": "src/popup/index.html"
+        "default_popup": "dist/popup/index.html"
     },
 
     "permissions": [
@@ -19,6 +19,6 @@
     ],
 
     "chrome_url_overrides" : {
-        "newtab": "src/newtab/index.html"
+        "newtab": "dist/newtab/index.html"
     }
 }
