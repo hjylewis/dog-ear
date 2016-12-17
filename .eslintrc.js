@@ -5,10 +5,18 @@ module.exports = {
         "es6": true,
         "node": true
     },
-    "extends": "eslint:recommended",
+    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "installedESLint": true,
     "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
         "sourceType": "module"
     },
+    "plugins": [
+        "react"
+    ],
     "rules": {
         "indent": [
             "error",
@@ -17,6 +25,10 @@ module.exports = {
         "linebreak-style": [
             "error",
             "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
         ],
         "semi": [
             "error",
