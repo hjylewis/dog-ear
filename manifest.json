@@ -1,0 +1,9 @@
+{
+    "manifest_version": 2,
+    "name": "dog ear",
+    "version": "1.0.0",
+
+    "default_locale": "en",
+    "description": "A plain text description",
+    "icons": {},
+}
