@@ -1,9 +1,24 @@
 {
     "manifest_version": 2,
     "name": "dog ear",
+    "author": "hjylewis",
     "version": "1.0.0",
 
-    "default_locale": "en",
-    "description": "A plain text description",
+    "description": "A chrome extension to temporarily bookmark tabs to declutter your browser",
     "icons": {},
+
+    "browser_action": {
+        "default_icon": {},
+        "default_title": "dog ear this tab",
+        "default_popup": "src/popup/index.html"
+    },
+
+    "permissions": [
+        "tabs",
+        "storage"
+    ],
+
+    "chrome_url_overrides" : {
+        "newtab": "src/newtab/index.html"
+    }
 }

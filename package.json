@@ -1,0 +1,26 @@
+{
+  "name": "dog-ear",
+  "version": "1.0.0",
+  "description": "A chrome extension to temporarily bookmark tabs to declutter your browser",
+  "main": "manifest.json",
+  "scripts": {
+    "start": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hjylewis/dog-ear.git"
+  },
+  "author": "hjylewis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hjylewis/dog-ear/issues"
+  },
+  "homepage": "https://github.com/hjylewis/dog-ear#readme",
+  "devDependencies": {
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-sequence": "^0.4.6",
+    "gulp-webpack": "^1.5.0",
+    "webpack": "^1.14.0"
+  }
+}

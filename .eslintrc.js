@@ -1,6 +1,7 @@
 module.exports = {
     "env": {
-        "browser": true
+        "browser": true,
+        "node": true
     },
     "extends": "eslint:recommended",
     "rules": {
@@ -11,10 +12,6 @@ module.exports = {
         "linebreak-style": [
             "error",
             "unix"
-        ],
-        "quotes": [
-            "error",
-            "single"
         ],
         "semi": [
             "error",
