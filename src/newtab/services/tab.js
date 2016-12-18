@@ -2,8 +2,9 @@ import Storage from './storage';
 
 class Tab {
     constructor (config) {
-        var {url, favicon, added, id} = config;
+        var {url, favicon, added, title, id} = config;
         this.id = id;
+        this.title = title;
         this.url = url;
         this.favicon = favicon;
         this.added = added;
@@ -21,10 +22,6 @@ class Tab {
 
     static get (id) {
         return Storage.getTab(id);
-    }
-
-    static getRecent (num = 20) {
-        return Storage.getRecentTabs(num);
     }
 
     add () {

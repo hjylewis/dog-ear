@@ -2,6 +2,7 @@ import Tab from './tab';
 import Error from './error';
 
 const TAB_ARRAY_KEY = 'tabArray';
+const DEFAULT_RECENT_NUM = 20;
 
 class Storage {
     constructor () {
@@ -60,7 +61,7 @@ class Storage {
         });
     }
 
-    getRecentTabs (num = 0) {
+    getRecentTabs (num = DEFAULT_RECENT_NUM) {
         return this._getTabIDs().then(tabIDs => {
             var recent = tabIDs.splice(-1 * num);
             return this._getPromise(recent).then(items => {
@@ -133,6 +134,10 @@ class Storage {
 
             return this._setPromise(TAB_ARRAY_KEY, tabArray);
         });
+    }
+
+    onChange (callback) {
+        this.storageArea.onChanged.addListener(callback);
     }
 
 }
