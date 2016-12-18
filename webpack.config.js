@@ -1,15 +1,15 @@
-var path = require("path");
+var path = require('path');
 
 module.exports = {
     entry: {
-        "newtab/bundle.js": "./src/newtab/index.js",
-        "popup/bundle.js": "./src/popup/index.js"
+        'newtab/bundle.js': './src/newtab/index.js',
+        'popup/bundle.js': './src/popup/index.js'
     },
 
     output: {
-        path: path.resolve(__dirname, "dist"),
-        filename: "[name]",
-        publicPath: ""
+        path: path.resolve(__dirname, 'dist'),
+        filename: '[name]',
+        publicPath: ''
     },
 
     module: {
@@ -23,5 +23,5 @@ module.exports = {
         ]
     },
 
-    devtool: "source-map"
+    devtool: 'source-map'
 };
