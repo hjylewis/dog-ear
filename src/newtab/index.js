@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Storage from './services/storage';
+import Storage from './services/storage/index';
 import Tab from './services/tab';
 
 
@@ -22,7 +22,7 @@ Storage._getTabIDs().then((tab) => {
     tab.add().then(() => {
         Tab.get(tab.id).then((tab) => {
             console.log(tab);
-            Tab.getRecent().then(tabs => {
+            Storage.getRecentTabs().then(tabs => {
                 tabs[0].remove();
                 console.log(tabs);
             })

@@ -1,4 +1,4 @@
-import Storage from './storage';
+import Storage from './storage/index';
 
 class Tab {
     constructor (config) {
