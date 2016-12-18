@@ -2,8 +2,8 @@ var path = require("path");
 
 module.exports = {
     entry: {
-        "newtab/bundle.js": "./src/newtab/scripts/index.js",
-        "popup/bundle.js": "./src/popup/scripts/index.js"
+        "newtab/bundle.js": "./src/newtab/index.js",
+        "popup/bundle.js": "./src/popup/index.js"
     },
 
     output: {
@@ -21,5 +21,7 @@ module.exports = {
                 query: { presets: ['es2015', 'react'] }
             }
         ]
-    }
+    },
+
+    devtool: "source-map"
 };
