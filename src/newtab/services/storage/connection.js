@@ -3,7 +3,7 @@ import Error from '../error';
 class Connection {
     constructor () {
         if (!chrome.storage) {
-            throw Error.NO_STORAGE;
+            throw Error.NO_STORAGE();
         }
 
         this.storageArea = chrome.storage.sync;

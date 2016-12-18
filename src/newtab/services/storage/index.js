@@ -26,7 +26,7 @@ class Storage {
 
     addTab (tab) {
         if (tab.id) {
-            return Promise.reject(Error.TAB_HAS_ID);
+            return Promise.reject(Error.TAB_HAS_ID());
         }
 
         return this._getNewID().then((id) => {
@@ -40,7 +40,7 @@ class Storage {
 
     removeTab (tab) {
         if (!tab.id) {
-            return Promise.reject(Error.TAB_NO_ID);
+            return Promise.reject(Error.TAB_NO_ID());
         }
 
         return Promise.all([
@@ -83,7 +83,7 @@ class Storage {
         return this._getTabIDs().then((tabArray) => {
             var idx = tabArray.lastIndexOf(id);
             if (idx < 0) {
-                return Promise.reject(Error.TAB_ID_NOT_FOUND);
+                return Promise.reject(Error.TAB_ID_NOT_FOUND());
             }
 
             tabArray.splice(idx, 1);
