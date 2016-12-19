@@ -1,5 +1,3 @@
-import Error from '../error';
-
 class Connection {
     constructor () {
         // TODO: check that chrome.storage.sync exits
