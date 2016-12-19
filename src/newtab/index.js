@@ -20,10 +20,10 @@ Storage._getTabIDs().then((tab) => {
 
 
     tab.add().then(() => {
-        Tab.get(tab.id).then((tab) => {
+        Tab.get(tab.url).then((tab) => {
             console.log(tab);
             Storage.getRecentTabs().then(tabs => {
-                tabs[0].remove();
+                // tabs[0].remove();
                 console.log(tabs);
             })
         })

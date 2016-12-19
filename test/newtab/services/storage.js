@@ -23,7 +23,7 @@ describe('StorageService', function() {
         it('should return undefined when no tab with that id exits', function(done) {
             setStore({});
 
-            Storage.getTab('0').then((tab) => {
+            Storage.getTab('url').then((tab) => {
                 assert.isUndefined(tab, 'no tab defined');
                 done();
             }).catch((err) => {
@@ -33,7 +33,9 @@ describe('StorageService', function() {
 
         it('should return tab when one exits', function(done) {
             setStore({
-                '0': {}
+                '0': {
+                    url: 'url'
+                }
             });
 
             Storage.getTab('0').then((tab) => {
@@ -49,10 +51,12 @@ describe('StorageService', function() {
     describe('#addTab()', function() {
         it('should add tab to store', function(done) {
             var mock = setStore({});
-            var tab = Tab.create({});
+            var tab = Tab.create({
+                url: 'url'
+            });
 
             Storage.addTab(tab).then(() => {
-                assert.property(mock.getStore(), tab.id, 'tab id is not in store');
+                assert.property(mock.getStore(), tab.url, 'tab id is not in store');
                 done();
             }).catch((err) => {
                 done(err);
@@ -61,7 +65,9 @@ describe('StorageService', function() {
 
         it('should add tab id to array', function(done) {
             var mock = setStore({});
-            var tab = Tab.create({});
+            var tab = Tab.create({
+                url: 'url'
+            });
 
             Storage.addTab(tab).then(() => {
                 var store = mock.getStore();
@@ -75,33 +81,40 @@ describe('StorageService', function() {
             });
         });
 
-        it('should fail if tab already has id', function(done) {
-            setStore({});
+        it('should overwrite if tab with same url has been added', function(done) {
+            var mock = setStore({});
             var tab = Tab.create({
-                id: 'has_an_id'
+                url: 'url'
             });
 
-            Storage.addTab(tab).then(() => {
-                done('Should not reach');
-            }).catch((err) => {
-                assert.isDefined(err);
+            var secondTab = Tab.create({
+                url: 'url'
+            });
+            Promise.all([
+                Storage.addTab(tab),
+                Storage.addTab(secondTab)
+            ]).then(() => {
+                assert.lengthOf(mock.getStore()[TAB_ARRAY_KEY], 1, 'tab id was not overwritten');
+                assert.lengthOf(Object.keys(mock.getStore()), 2, 'tab was not overwritten');
                 done();
+            }).catch((err) => {
+                done(err);
             });
         });
     });
 
     describe('#removeTab()', function() {
         it('should remove tab from store', function(done) {
-            var id = 'an_id';
-            var tab = { id: id };
+            var url = 'an_url';
+            var tab = { url: url };
             var store = {};
-            store[id] = tab;
-            store[TAB_ARRAY_KEY] = [ id ];
+            store[url] = tab;
+            store[TAB_ARRAY_KEY] = [ url ];
 
             var mock = setStore(store);
 
             Storage.removeTab(tab).then(() => {
-                assert.notProperty(mock.getStore(), id, 'tab is still in store');
+                assert.notProperty(mock.getStore(), url, 'tab is still in store');
                 done();
             }).catch((err) => {
                 done(err);
@@ -109,11 +122,11 @@ describe('StorageService', function() {
         });
 
         it('should remove tab id from array', function(done) {
-            var id = 'an_id';
-            var tab = { id: id };
+            var url = 'an_url';
+            var tab = { url: url };
             var store = {};
-            store[id] = tab;
-            store[TAB_ARRAY_KEY] = [ id ];
+            store[url] = tab;
+            store[TAB_ARRAY_KEY] = [ url ];
 
             var mock = setStore(store);
 
@@ -125,9 +138,9 @@ describe('StorageService', function() {
             });
         });
 
-        it('should fail if tab already has id', function(done) {
-            var id = 'an_id';
-            var tab = { id: id };
+        it('should fail if tab not in store', function(done) {
+            var url = 'an_url';
+            var tab = { url: url };
             var store = {};
 
             setStore(store);
@@ -156,19 +169,19 @@ describe('StorageService', function() {
             setStore({});
 
             Promise.all([
-                Storage.addTab({ title: 'not recent' }),
-                Storage.addTab({ title: 'not recent' }),
-                Storage.addTab({ title: 'not recent' }),
-                Storage.addTab({ title: 'not recent' }),
-                Storage.addTab({ title: 'not recent' }),
-                Storage.addTab({ title: 'not recent' }),
+                Storage.addTab(Tab.create({ url: 'not recent 1' })),
+                Storage.addTab(Tab.create({ url: 'not recent 2' })),
+                Storage.addTab(Tab.create({ url: 'not recent 3' })),
+                Storage.addTab(Tab.create({ url: 'not recent 4' })),
+                Storage.addTab(Tab.create({ url: 'not recent 5' })),
+                Storage.addTab(Tab.create({ url: 'not recent 6' }))
             ]).then(() => {
-                return Storage.addTab({ title: 'most recent' });
+                return Storage.addTab({ url: 'most recent' });
             }).then(() => {
                 return Storage.getRecentTabs(1);
             }).then((tabs) => {
                 assert.lengthOf(tabs, 1, 'should be length 1');
-                assert.equal(tabs[0].title, 'most recent');
+                assert.equal(tabs[0].url, 'most recent');
                 done();
             }).catch((err) => {
                 done(err);
@@ -179,16 +192,16 @@ describe('StorageService', function() {
             setStore({});
 
             Promise.all([
-                Storage.addTab({}),
-                Storage.addTab({}),
-                Storage.addTab({}),
-                Storage.addTab({}),
-                Storage.addTab({}),
-                Storage.addTab({}),
+                Storage.addTab(Tab.create({ url: '1' })),
+                Storage.addTab(Tab.create({ url: '2' })),
+                Storage.addTab(Tab.create({ url: '3' })),
+                Storage.addTab(Tab.create({ url: '4' })),
+                Storage.addTab(Tab.create({ url: '5' })),
+                Storage.addTab(Tab.create({ url: '6' }))
             ]).then(() => {
                 return Storage.getRecentTabs(3);
             }).then((tabs) => {
-                assert.lengthOf(tabs, 3, 'should be length 1');
+                assert.lengthOf(tabs, 3, 'should be length 3');
                 done();
             }).catch((err) => {
                 done(err);

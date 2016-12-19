@@ -1,9 +1,9 @@
 import Storage from './storage/index';
+import Error from './error';
 
 class Tab {
     constructor (config) {
-        var {url, favicon, added, title, id} = config;
-        this.id = id;
+        var {url, favicon, added, title} = config;
         this.title = title;
         this.url = url;
         this.favicon = favicon;
@@ -16,6 +16,10 @@ class Tab {
         }
 
         let tab = new Tab(config);
+
+        if (!tab.url) {
+            throw Error.TAB_NO_URL();
+        }
 
         if (!tab.added) {
             tab.added = Date.now();
