@@ -5,7 +5,7 @@
   "main": "manifest.json",
   "scripts": {
     "start": "gulp",
-    "test": "./node_modules/mocha/bin/mocha --recursive --compilers js:babel-core/register"
+    "test": "NODE_ENV=testing ./node_modules/mocha/bin/mocha --recursive --compilers js:babel-core/register"
   },
   "repository": {
     "type": "git",
