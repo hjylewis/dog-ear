@@ -51,7 +51,7 @@ class Connection {
     }
 
     onChange (callback) {
-        chrome.storage.sync.onChanged.addListener(callback);
+        chrome.storage.onChanged.addListener(callback);
     }
 
 }

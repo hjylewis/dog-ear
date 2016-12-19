@@ -21,7 +21,7 @@ class Storage {
         return this._getTabIDs().then(tabIDs => {
             var recent = tabIDs.splice(-1 * num);
             return Connection.get(recent).then(items => {
-                return recent.map((url) => {
+                return recent.reverse().map((url) => {
                     return Tab.create(items[url]);
                 });
             });
@@ -48,14 +48,13 @@ class Storage {
             return Promise.reject(Error.TAB_NO_ID());
         }
 
-        return Promise.all([
-            this._removeFromTabIDs(tab.url),
-            Connection.delete(tab.url)
-        ]);
+        return this._removeFromTabIDs(tab.url).then(() => {
+            return Connection.delete(tab.url);
+        });
     }
 
     onChange (callback) {
-        Connection.onChanged(callback);
+        Connection.onChange(callback);
     }
 
     _getTabIDs () {
