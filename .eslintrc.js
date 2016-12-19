@@ -3,9 +3,10 @@ module.exports = {
         "browser": true,
         "commonjs": true,
         "es6": true,
-        "node": true
+        "node": true,
+        "mocha": true
     },
-    "extends": ["eslint:recommended", "plugin:react/recommended"],
+    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:mocha/recommended"],
     "installedESLint": true,
     "parserOptions": {
         "ecmaFeatures": {
@@ -15,7 +16,8 @@ module.exports = {
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react",
+        "mocha"
     ],
     "rules": {
         "indent": [

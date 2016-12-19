@@ -2,16 +2,17 @@ import Error from '../error';
 
 class Connection {
     constructor () {
-        if (!chrome.storage) {
-            throw Error.NO_STORAGE();
-        }
-
-        this.storageArea = chrome.storage.sync;
+        // TODO: check that chrome.storage.sync exits
+        // if (!chrome.storage) {
+        //     throw Error.NO_STORAGE();
+        // }
+        //
+        // this.storageArea = chrome.storage.sync;
     }
 
     get (key) {
         var getPromise = new Promise ((resolve, reject) => {
-            this.storageArea.get(key, (value) => {
+            chrome.storage.sync.get(key, (value) => {
                 if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError);
                 }
@@ -27,7 +28,7 @@ class Connection {
         object[key] = value;
 
         var setPromise = new Promise ((resolve, reject) => {
-            this.storageArea.set(object, () => {
+            chrome.storage.sync.set(object, () => {
                 if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError);
                 }
@@ -40,7 +41,7 @@ class Connection {
 
     delete (key) {
         var deletePromise = new Promise ((resolve, reject) => {
-            this.storageArea.remove(key, () => {
+            chrome.storage.sync.remove(key, () => {
                 if (chrome.runtime.lastError) {
                     reject(chrome.runtime.lastError);
                 }
@@ -52,7 +53,7 @@ class Connection {
     }
 
     onChange (callback) {
-        this.storageArea.onChanged.addListener(callback);
+        chrome.storage.sync.onChanged.addListener(callback);
     }
 
 }

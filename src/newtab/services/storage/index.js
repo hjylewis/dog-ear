@@ -1,10 +1,8 @@
-import mock from './mockConnection';
+import Connection from './connection';
 import { TAB_ARRAY_KEY, DEFAULT_RECENT_NUM } from './constants';
 
 import Tab from '../tab';
 import Error from '../error';
-
-var Connection = new mock({});
 
 class Storage {
     getTab (id) {

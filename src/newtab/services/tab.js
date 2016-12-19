@@ -11,6 +11,10 @@ class Tab {
     }
 
     static create (config) {
+        if (config === undefined) {
+            return undefined;
+        }
+
         let tab = new Tab(config);
 
         if (!tab.added) {

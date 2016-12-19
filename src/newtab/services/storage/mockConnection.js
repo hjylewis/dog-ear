@@ -38,6 +38,10 @@ class MockConnection {
         // not mocked
     }
 
+    getStore () {
+        return this.store;
+    }
+
 }
 
 export default MockConnection;
