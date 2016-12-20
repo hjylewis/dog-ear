@@ -3,6 +3,7 @@ import React from 'react';
 class Tab extends React.Component {
     onClick () {
         this.props.data.remove();
+        window.location.href = this.props.data.url; // Go to url
     }
 
     render () {
