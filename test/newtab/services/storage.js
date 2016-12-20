@@ -1,7 +1,7 @@
-import Storage from '../../../src/newtab/services/storage/index';
-import { TAB_ARRAY_KEY } from '../../../src/newtab/services/storage/constants';
-import Tab from '../../../src/newtab/services/tab';
-import Mock from '../../../src/newtab/services/storage/mockConnection';
+import Storage from '../../../src/services/storage/index';
+import { TAB_ARRAY_KEY } from '../../../src/services/storage/constants';
+import Tab from '../../../src/services/tab';
+import Mock from '../../../src/services/storage/mockConnection';
 import { assert } from 'chai';
 
 // Change connection to mock connection

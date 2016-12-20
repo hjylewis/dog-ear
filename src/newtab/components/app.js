@@ -1,5 +1,5 @@
 import React from 'react';
-import Storage from '../services/storage/index';
+import Storage from '../../services/storage/index';
 
 import List from './list';
 

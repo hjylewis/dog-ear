@@ -9,16 +9,21 @@
 
     "browser_action": {
         "default_icon": {},
-        "default_title": "dog ear this tab",
-        "default_popup": "dist/popup/index.html"
+        "default_title": "Dog Ear this tab"
     },
 
     "permissions": [
         "tabs",
-        "storage"
+        "storage",
+        "contextMenus"
     ],
 
     "chrome_url_overrides" : {
         "newtab": "dist/newtab/index.html"
+    },
+
+    "background": {
+        "scripts": ["dist/popup/bundle.js"],
+        "persistent": false
     }
 }
