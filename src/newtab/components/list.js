@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import Tab from './tab';
 
@@ -24,7 +25,7 @@ class List extends React.Component {
         });
 
         return (
-            <div>
+            <div className={classNames('list')}>
                 {tabs}
                 {this.props.showLoadMore ? <LoadMoreBtn onClick={this.props.loadMore} /> : ''}
             </div>

@@ -1,0 +1,41 @@
+.tab {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    padding: 5px;
+
+    overflow: hidden;
+
+    cursor: pointer;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    span {
+        padding-right: 5px;
+        flex: 0 0 auto;
+    }
+}
+
+.favicon {
+    width: 17px;
+    height: 17px;
+
+    img {
+        width: 100%;
+    }
+}
+
+.info {
+    .title {
+
+    }
+
+    .url {
+        font-style: italic;
+        color: lighten($text-color, 30%);
+        font-size: smaller;
+    }
+}

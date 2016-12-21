@@ -16,7 +16,7 @@ gulp.task('webpack', function() {
         .pipe(gulp.dest('dist/'));
 });
 
-gulp.watch('src/**/*.js', ['webpack']);
+gulp.watch('src/**/*[.js|.scss]', ['webpack']);
 
 gulp.task('copy', function() {
     return gulp.src('src/**/*.html')

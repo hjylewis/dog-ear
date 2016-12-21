@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 class Tab extends React.Component {
     onClick () {
@@ -8,8 +9,18 @@ class Tab extends React.Component {
 
     render () {
         return (
-            <div onClick={this.onClick.bind(this)}>
-                {this.props.data.url}
+            <div className={classNames('tab')} onClick={this.onClick.bind(this)}>
+                <span className={classNames('favicon')}>
+                    {this.props.data.favicon ? <img src={this.props.data.favicon} /> : ''}
+                </span>
+                <span className={classNames('info')}>
+                    <span className={classNames('title')}>
+                        {this.props.data.title}
+                    </span>
+                    <span className={classNames('url')}>
+                        {this.props.data.url}
+                    </span>
+                </span>
             </div>
         );
     }
