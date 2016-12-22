@@ -24,6 +24,10 @@ module.exports = {
             {
                 test: /\.scss$/,
                 loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+            },
+            {
+                test: /\.svg$/,
+                loaders: ['babel?presets[]=es2015,presets[]=react', 'svg-react']
             }
         ]
     },

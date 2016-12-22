@@ -1,0 +1,12 @@
+<svg width="464" height="464" viewBox="0 0 464 464" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>Unchecked</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(305 233)" figma:type="canvas">
+<g id="Unchecked" style="mix-blend-mode:normal;" figma:type="vector">
+<use xlink:href="#path0_stroke" transform="translate(-280 -208)" fill="#7AA4F0" style="mix-blend-mode:normal;"/>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 0 0L 0 -25C -13.8071 -25 -25 -13.8071 -25 5.55112e-15L 0 0ZM 414 0L 439 0C 439 -13.8071 427.807 -25 414 -25L 414 0ZM 414 414L 414 439C 427.807 439 439 427.807 439 414L 414 414ZM 0 414L -25 414C -25 427.807 -13.8071 439 5.55112e-15 439L 0 414ZM 0 25L 414 25L 414 -25L 0 -25L 0 25ZM 389 0L 389 414L 439 414L 439 0L 389 0ZM 414 389L 0 389L 0 439L 414 439L 414 389ZM 25 414L 25 0L -25 0L -25 414L 25 414Z"/>
+</defs>
+</svg>

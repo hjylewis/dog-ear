@@ -1,0 +1,20 @@
+<svg width="464" height="464" viewBox="0 0 464 464" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>Checked</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(305 233)" figma:type="canvas">
+<g id="Checked" style="mix-blend-mode:normal;" figma:type="frame">
+<g id="Vector" style="mix-blend-mode:normal;" figma:type="vector">
+<use xlink:href="#path0_fill" transform="translate(-280 -208)" fill="#7AA4F0" style="mix-blend-mode:normal;"/>
+<use xlink:href="#path1_stroke" transform="translate(-280 -208)" fill="#7AA4F0" style="mix-blend-mode:normal;"/>
+</g>
+<g id="Vector 2" style="mix-blend-mode:normal;" figma:type="vector">
+<use xlink:href="#path2_stroke" transform="translate(-239 -117)" fill="#F2F2F2" style="mix-blend-mode:normal;"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_fill" d="M 414 0L 0 0L 0 414L 414 414L 414 0Z"/>
+<path id="path1_stroke" d="M 0 0L 0 -25C -13.8071 -25 -25 -13.8071 -25 5.55112e-15L 0 0ZM 414 0L 439 0C 439 -13.8071 427.807 -25 414 -25L 414 0ZM 414 414L 414 439C 427.807 439 439 427.807 439 414L 414 414ZM 0 414L -25 414C -25 427.807 -13.8071 439 5.55112e-15 439L 0 414ZM 0 25L 414 25L 414 -25L 0 -25L 0 25ZM 389 0L 389 414L 439 414L 439 0L 389 0ZM 414 389L 0 389L 0 439L 414 439L 414 389ZM 25 414L 25 0L -25 0L -25 414L 25 414Z"/>
+<path id="path2_stroke" d="M 17.77 155.415C 8.05812 145.601 -7.77079 145.518 -17.5849 155.23C -27.399 164.942 -27.4818 180.771 -17.77 190.585L 17.77 155.415ZM 95 269L 77.23 286.585C 81.9853 291.39 88.4839 294.065 95.244 293.999C 102.004 293.933 108.449 291.132 113.11 286.235L 95 269ZM 369.11 17.2347C 378.628 7.23286 378.236 -8.59141 368.235 -18.1099C 358.233 -27.6283 342.409 -27.2364 332.89 -17.2347L 369.11 17.2347ZM -17.77 190.585L 77.23 286.585L 112.77 251.415L 17.77 155.415L -17.77 190.585ZM 113.11 286.235L 369.11 17.2347L 332.89 -17.2347L 76.8902 251.765L 113.11 286.235Z"/>
+</defs>
+</svg>

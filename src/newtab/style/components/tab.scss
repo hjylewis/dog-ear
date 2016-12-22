@@ -19,14 +19,66 @@
     }
 }
 
-.favicon {
-    width: 17px;
-    height: 17px;
+$icon-size: 17px;
 
-    img {
+.icon {
+    width: $icon-size;
+    height: $icon-size;
+
+    .favicon {
         width: 100%;
+        transition: transform 0.1s 0.1s;
+        transform: rotateY(0deg);
+    }
+
+    .checked-icon {
+        display: none;
+        width: 100%;
+        height: 100%;
+
+        position: relative;
+        top: -1 * $icon-size;
+    }
+
+    .unchecked-icon {
+        // display: none;
+        width: 100%;
+        height: 100%;
+
+        position: relative;
+        top: -1 * $icon-size;
+
+        transition: transform 0.1s 0s;
+        transform: rotateY(-90deg);
+    }
+
+    &:hover {
+
+        .favicon {
+            transform: rotateY(90deg);
+            transition: transform 0.1s 0s;
+        }
+
+        .unchecked-icon {
+            display: block;
+            transform: rotateY(0deg);
+            transition: transform 0.1s 0.1s;
+
+        }
+    }
+
+    &.selected {
+        .favicon {
+            display: none;
+        }
+
+        .checked-icon {
+            display: block;
+        }
     }
 }
+
+
 
 .info {
     .title {
