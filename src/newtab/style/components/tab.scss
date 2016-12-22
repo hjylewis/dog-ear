@@ -15,38 +15,46 @@
 
     span {
         padding-right: 5px;
-        flex: 0 0 auto;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
 $icon-size: 21.25px;
 
 .icon {
+    flex: 0 0 auto;
+
+    position: relative;
     width: $icon-size;
     height: $icon-size;
 
     .favicon {
-        width: 100%;
+        width: $icon-size;
         transition: transform 0.1s 0.1s;
         transform: rotateY(0deg);
+
+        position: absolute;
+        top: 0;
     }
 
     .checked-icon {
         display: none;
-        width: 100%;
-        height: 100%;
+        width: $icon-size;
+        height: $icon-size;
 
-        position: relative;
-        top: -1 * $icon-size;
+        position: absolute;
+        top: 0;
     }
 
     .unchecked-icon {
-        // display: none;
-        width: 100%;
-        height: 100%;
+        width: $icon-size;
+        height: $icon-size;
 
-        position: relative;
-        top: -1 * $icon-size;
+        position: absolute;
+        top: 0;
 
         transition: transform 0.1s 0s;
         transform: rotateY(-90deg);
@@ -68,6 +76,10 @@ $icon-size: 21.25px;
     }
 
     &.selected {
+        .favicon {
+            display: none;
+        }
+
         .unchecked-icon {
             display: none;
         }
@@ -81,6 +93,8 @@ $icon-size: 21.25px;
 
 
 .info {
+    flex: 0 1 auto;
+    
     .title {
 
     }
