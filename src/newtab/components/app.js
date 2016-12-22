@@ -13,7 +13,11 @@ class App extends React.Component {
 
         this.state = {
             tabs: [],
+            selection: {}
         };
+
+        this.loadMore = this.loadMore.bind(this);
+        this.toggleSelection = this.toggleSelection.bind(this);
     }
 
     componentDidMount () {
@@ -34,6 +38,19 @@ class App extends React.Component {
         this.loadTabs();
     }
 
+    toggleSelection (tab) {
+        var selection = this.state.selection;
+        if (tab.url in selection) {
+            delete selection[tab.url];
+        } else {
+            selection[tab.url] = tab;
+        }
+
+        this.setState({
+            selection: selection
+        });
+    }
+
     render () {
         console.log(this.state.tabs);
 
@@ -41,8 +58,11 @@ class App extends React.Component {
             <div>
                 <List
                     tabs={this.state.tabs}
-                    loadMore={this.loadMore.bind(this)}
+                    loadMore={this.loadMore}
                     showLoadMore={this.state.tabs.length === this.tabNumber}
+
+                    toggleSelection={this.toggleSelection}
+                    selection={this.state.selection}
                 />
             </div>
         );

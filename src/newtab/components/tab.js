@@ -6,9 +6,22 @@ import UncheckedIcon from '../assets/Unchecked.svg';
 
 
 class Icon extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.toggleSelection = this.toggleSelection.bind(this);
+    }
+    toggleSelection (e) {
+        e.stopPropagation();
+        this.props.toggleSelection();
+    }
+
     render () {
         return (
-            <span className={classNames('icon')}>
+            <span
+                className={classNames({ 'icon': true, 'selected': this.props.selected })}
+                onClick={this.toggleSelection}
+            >
                 {this.props.favicon ? <img src={this.props.favicon} className={classNames('favicon')}/> : ''}
                 <CheckedIcon className={classNames('checked-icon')}/>
                 <UncheckedIcon className={classNames('unchecked-icon')}/>
@@ -19,6 +32,8 @@ class Icon extends React.Component {
 
 Icon.propTypes = {
     favicon: React.PropTypes.string,
+    selected: React.PropTypes.bool,
+    toggleSelection: React.PropTypes.func
 };
 
 class Tab extends React.Component {
@@ -30,7 +45,11 @@ class Tab extends React.Component {
     render () {
         return (
             <div className={classNames('tab')} onClick={this.onClick.bind(this)}>
-                <Icon favicon={this.props.data.favicon}/>
+                <Icon
+                    favicon={this.props.data.favicon}
+                    selected={this.props.selected}
+                    toggleSelection={this.props.toggleSelection}
+                />
                 <span className={classNames('info')}>
                     <span className={classNames('title')}>
                         {this.props.data.title}
@@ -46,6 +65,8 @@ class Tab extends React.Component {
 
 Tab.propTypes = {
     data: React.PropTypes.object.isRequired,
+    selected: React.PropTypes.bool,
+    toggleSelection: React.PropTypes.func
 };
 
 export default Tab;

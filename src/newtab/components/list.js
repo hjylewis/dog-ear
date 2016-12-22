@@ -21,7 +21,14 @@ LoadMoreBtn.propTypes = {
 class List extends React.Component {
     render () {
         var tabs = this.props.tabs.map((tab) => {
-            return <Tab key={tab.url} data={tab} />;
+            return (
+                <Tab
+                    key={tab.url}
+                    data={tab}
+                    selected={tab.url in this.props.selection}
+                    toggleSelection={this.props.toggleSelection.bind(null, tab)}
+                />
+            );
         });
 
         return (
@@ -35,8 +42,12 @@ class List extends React.Component {
 
 List.propTypes = {
     tabs: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // Array of tabs
+
     loadMore: React.PropTypes.func, // Function that loads more
     showLoadMore: React.PropTypes.bool, // Whether there's more to load (Show the button)
+
+    toggleSelection: React.PropTypes.func, // Function that selects or unselects tab
+    selection: React.PropTypes.object.isRequired // Selected tabs
 };
 
 export default List;
