@@ -37,14 +37,9 @@ Icon.propTypes = {
 };
 
 class Tab extends React.Component {
-    onClick () {
-        this.props.data.remove();
-        window.location.href = this.props.data.url; // Go to url
-    }
-
     render () {
         return (
-            <div className={classNames('tab')} onClick={this.onClick.bind(this)}>
+            <div className={classNames('tab')} onClick={this.props.openTab}>
                 <Icon
                     favicon={this.props.data.favicon}
                     selected={this.props.selected}
@@ -65,6 +60,7 @@ class Tab extends React.Component {
 
 Tab.propTypes = {
     data: React.PropTypes.object.isRequired,
+    openTab: React.PropTypes.func,
     selected: React.PropTypes.bool,
     toggleSelection: React.PropTypes.func
 };

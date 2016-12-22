@@ -26,6 +26,7 @@ class List extends React.Component {
                     key={tab.url}
                     data={tab}
                     selected={tab.url in this.props.selection}
+                    openTab={this.props.openTabs.bind(null, tab)}
                     toggleSelection={this.props.toggleSelection.bind(null, tab)}
                 />
             );
@@ -42,6 +43,7 @@ class List extends React.Component {
 
 List.propTypes = {
     tabs: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // Array of tabs
+    openTabs: React.PropTypes.func, // Function that opens tab
 
     loadMore: React.PropTypes.func, // Function that loads more
     showLoadMore: React.PropTypes.bool, // Whether there's more to load (Show the button)
