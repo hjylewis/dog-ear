@@ -33,6 +33,8 @@ class Storage {
             return this.getTab(tab.url).then((oldTab) => {
                 if (oldTab) {
                     return this.removeTab(oldTab);
+                } else {
+                    return Promise.resolve();
                 }
             }).then(() => {
                 return Promise.all([

@@ -49,13 +49,14 @@ class App extends React.Component {
 
             tabs.forEach((tab) => {
                 chrome.tabs.create({ url: tab.url }, () => {
-                    tab.remove();
-                    count++;
+                    tab.remove().then(() => {
+                        count++;
 
-                    // If last one
-                    if (count === tabs.length) {
-                        chrome.tabs.remove(currentTab.id);
-                    }
+                        // If last one
+                        if (count === tabs.length) {
+                            chrome.tabs.remove(currentTab.id);
+                        }
+                    });
                 });
             });
         });
