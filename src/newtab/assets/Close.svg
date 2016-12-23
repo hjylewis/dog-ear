@@ -1,0 +1,18 @@
+<svg width="387" height="388" viewBox="0 0 387 388" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>Close</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(739 195)" figma:type="canvas">
+<g id="Close" style="mix-blend-mode:normal;" figma:type="frame">
+<g id="Vector 3" style="mix-blend-mode:normal;" figma:type="vector">
+<use xlink:href="#path3_stroke" transform="translate(-694 -149.5)" style="mix-blend-mode:normal;"/>
+</g>
+<g id="Vector 4" style="mix-blend-mode:normal;" figma:type="vector">
+<use xlink:href="#path4_stroke" transform="translate(-693 -149.5)" style="mix-blend-mode:normal;"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path3_stroke" d="M 31.8198 -31.8198C 14.2462 -49.3934 -14.2462 -49.3934 -31.8198 -31.8198C -49.3934 -14.2462 -49.3934 14.2462 -31.8198 31.8198L 31.8198 -31.8198ZM 265.18 328.82C 282.754 346.393 311.246 346.393 328.82 328.82C 346.393 311.246 346.393 282.754 328.82 265.18L 265.18 328.82ZM -31.8198 31.8198L 265.18 328.82L 328.82 265.18L 31.8198 -31.8198L -31.8198 31.8198Z"/>
+<path id="path4_stroke" d="M 327.82 31.8198C 345.393 14.2462 345.393 -14.2462 327.82 -31.8198C 310.246 -49.3934 281.754 -49.3934 264.18 -31.8198L 327.82 31.8198ZM -31.8198 264.18C -49.3934 281.754 -49.3934 310.246 -31.8198 327.82C -14.2462 345.393 14.2462 345.393 31.8198 327.82L -31.8198 264.18ZM 264.18 -31.8198L -31.8198 264.18L 31.8198 327.82L 327.82 31.8198L 264.18 -31.8198Z"/>
+</defs>
+</svg>

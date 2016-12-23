@@ -1,6 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
+import CloseIcon from '../assets/Close.svg';
+
 class OpenBtn extends React.Component {
     render () {
         return (
@@ -34,9 +36,7 @@ DeleteBtn.propTypes = {
 class CloseBtn extends React.Component {
     render () {
         return (
-            <button className={classNames('close-Btn')} onClick={this.props.action}>
-                Close
-            </button>
+            <CloseIcon className={classNames('close-btn')} onClick={this.props.action} />
         );
     }
 }
