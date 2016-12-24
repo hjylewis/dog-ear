@@ -2,8 +2,10 @@
 <title>Unchecked</title>
 <desc>Created using Figma</desc>
 <g id="Canvas" transform="translate(-214 233)" figma:type="canvas">
-<g id="Unchecked" style="mix-blend-mode:normal;" figma:type="vector">
+<g id="Unchecked" style="mix-blend-mode:normal;" figma:type="frame">
+<g id="Vector 5" style="mix-blend-mode:normal;" figma:type="vector">
 <use xlink:href="#path0_stroke" transform="translate(239 -208)" fill="#7AA4F0" style="mix-blend-mode:normal;"/>
+</g>
 </g>
 </g>
 <defs>
