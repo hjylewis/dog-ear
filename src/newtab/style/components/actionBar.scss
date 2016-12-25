@@ -22,6 +22,8 @@
 
     cursor: pointer;
 
+    fill: lighten($text-color, 20%);
+
     &:hover {
         fill: $warning;
     }
