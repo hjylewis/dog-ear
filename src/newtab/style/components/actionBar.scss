@@ -5,11 +5,58 @@
     bottom: 0;
     left: -1;
 
-    background-color: $background-color;
-    border-top: $text-color 1px solid;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+
+    background-color: white;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .close-btn {
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+
+    cursor: pointer;
+
+    &:hover {
+        fill: $warning;
+    }
+}
+
+.delete-btn, .open-btn {
+    padding: 10px 15px;
+    margin-left: 20px;
+
+    background: white;
+
+    border: 1.5px solid currentColor;
+    border-radius: 10px;
+
+    font-size: 12px;
+
+    transition: all 0.2s ease-in-out;
+}
+
+.open-btn {
+    color: $primary;
+
+    &:hover {
+        background-color: $primary;
+        border-color: $primary;
+        color: white;
+    }
+}
+
+.delete-btn {
+    color: $warning;
+
+    &:hover {
+        background-color: $warning;
+        border-color: $warning;
+        color: white;
+    }
 }
