@@ -1,10 +1,11 @@
 import React from 'react';
 import Storage from '../../services/storage/index';
+import TimeGrouping from '../../services/timeGrouping';
 
 import List from './list';
 import ActionBar from './actionBar';
 
-const PAGE_SIZE = 30;
+const PAGE_SIZE = 40;
 
 class App extends React.Component {
     constructor (props) {
@@ -14,6 +15,7 @@ class App extends React.Component {
 
         this.state = {
             tabs: [],
+            groups: [],
             selection: {}
         };
 
@@ -32,7 +34,10 @@ class App extends React.Component {
 
     loadTabs () {
         Storage.getRecentTabs(this.tabNumber).then((tabs) => {
-            this.setState({ tabs: tabs });
+            this.setState({
+                tabs: tabs,
+                groups: TimeGrouping.createGrouping(tabs)
+            });
         });
     }
 
@@ -95,7 +100,7 @@ class App extends React.Component {
                     <h1>Dog Ears</h1>
                 </div>
                 <List
-                    tabs={this.state.tabs}
+                    groups={this.state.groups}
                     openTabs={this.openTabs}
 
                     toggleSelection={this.toggleSelection}

@@ -5,6 +5,10 @@ class TimeGrouping {
         this.timeago = new Timeago(relativeTime);
     }
 
+    static createGrouping (tabs) {
+        return (new TimeGrouping()).createGrouping(tabs);
+    }
+
     createGrouping (tabs) {
         var groups = {};
         var ordering = [];
