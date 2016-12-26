@@ -28,11 +28,11 @@ describe('TimeGroupingService', function() {
 
             assert.isArray(groupings, 'should be an array');
             assert.lengthOf(groupings, 5);
-            assert.equal(groupings[0].timeago, 'just now');
-            assert.equal(groupings[1].timeago, '10 seconds ago');
-            assert.equal(groupings[2].timeago, '5 minutes ago');
-            assert.equal(groupings[3].timeago, '8 hours ago');
-            assert.equal(groupings[4].timeago, '3 days ago');
+            assert.equal(groupings[0].group, 'just now');
+            assert.equal(groupings[1].group, '10 seconds ago');
+            assert.equal(groupings[2].group, '5 minutes ago');
+            assert.equal(groupings[3].group, '8 hours ago');
+            assert.equal(groupings[4].group, '3 days ago');
         });
 
         it('should return corrent number in groupings', function() {
@@ -58,8 +58,8 @@ describe('TimeGroupingService', function() {
 
             assert.isArray(groupings, 'should be an array');
             assert.lengthOf(groupings, 2);
-            assert.equal(groupings[0].timeago, 'just now');
-            assert.equal(groupings[1].timeago, '3 days ago');
+            assert.equal(groupings[0].group, 'just now');
+            assert.equal(groupings[1].group, '3 days ago');
 
             assert.lengthOf(groupings[0].tabs, 2);
             assert.lengthOf(groupings[1].tabs, 3);

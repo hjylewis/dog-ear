@@ -25,7 +25,7 @@ class TimeGrouping {
 
         return ordering.map((timeago) => {
             return {
-                timeago: timeago,
+                group: timeago,
                 tabs: groups[timeago]
             };
         });

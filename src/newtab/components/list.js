@@ -24,7 +24,7 @@ class GroupHeaders extends React.Component {
 
         return (
             <div className='group-header'>
-                <h3>{this.props.data.timeago}</h3>
+                <h3>{this.props.data.group}</h3>
                 <span className='select-all' onClick={this.selectAll}>
                     {this.allSelected ? 'un' : ''}select all
                 </span>
@@ -45,7 +45,7 @@ class List extends React.Component {
         this.props.groups.forEach((group) => {
             tabs.push(
                 <GroupHeaders
-                    key={group.timeago}
+                    key={group.group}
                     data={group}
                     select={this.props.select}
                     selection={this.props.selection}
