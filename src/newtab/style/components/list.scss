@@ -1,4 +1,33 @@
 .list {
     margin: 0px auto 60px;
-    width: 500px;
+    width: $app-width;
+}
+
+.group-header {
+    h3 {
+        display: inline-block;
+    }
+
+    .select-all {
+        display: none;
+    }
+
+    &:hover {
+        .select-all {
+            display: initial;
+        }
+    }
+}
+
+.select-all {
+    margin: 7px;
+
+    color: lighten($text-color, 40%);
+    font-size: smaller;
+
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
 }

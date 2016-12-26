@@ -3,52 +3,81 @@ import classNames from 'classnames';
 
 import Tab from './tab';
 
-class LoadMoreBtn extends React.Component {
+class GroupHeaders extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.allSelected = false;
+
+        this.selectAll = this.selectAll.bind(this);
+    }
+    selectAll () {
+        this.props.data.tabs.forEach((tab) => {
+            this.props.select(tab, !this.allSelected);
+        });
+    }
+
     render () {
+        this.allSelected = this.props.data.tabs.reduce((a, b) => {
+            return a && (b.url in this.props.selection);
+        }, true);
+
         return (
-            <div onClick={this.props.onClick}>
-                Load More
+            <div className='group-header'>
+                <h3>{this.props.data.group}</h3>
+                <span className='select-all' onClick={this.selectAll}>
+                    {this.allSelected ? 'un' : ''}select all
+                </span>
             </div>
         );
     }
 }
 
-LoadMoreBtn.propTypes = {
-    onClick: React.PropTypes.func,
+GroupHeaders.propTypes = {
+    data: React.PropTypes.object.isRequired, // group data
+    select: React.PropTypes.func, // Function that selects or unselects tab
+    selection: React.PropTypes.object.isRequired // Selected tabs
 };
-
 
 class List extends React.Component {
     render () {
-        var tabs = this.props.tabs.map((tab) => {
-            return (
-                <Tab
-                    key={tab.url}
-                    data={tab}
-                    selected={tab.url in this.props.selection}
-                    openTab={this.props.openTabs.bind(null, tab)}
-                    toggleSelection={this.props.toggleSelection.bind(null, tab)}
+        var tabs = [];
+        this.props.groups.forEach((group) => {
+            tabs.push(
+                <GroupHeaders
+                    key={group.group}
+                    data={group}
+                    select={this.props.select}
+                    selection={this.props.selection}
                 />
             );
+
+            group.tabs.forEach((tab) => {
+                tabs.push(
+                    <Tab
+                        key={tab.url}
+                        data={tab}
+                        selected={tab.url in this.props.selection}
+                        openTab={this.props.openTabs.bind(null, tab)}
+                        select={this.props.select.bind(null, tab)}
+                    />
+                );
+            });
         });
 
         return (
             <div className={classNames('list')}>
                 {tabs}
-                {this.props.showLoadMore ? <LoadMoreBtn onClick={this.props.loadMore} /> : ''}
             </div>
         );
     }
 }
 
 List.propTypes = {
-    tabs: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // Array of tabs
+    groups: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // Array of groups
     openTabs: React.PropTypes.func, // Function that opens tab
 
-    loadMore: React.PropTypes.func, // Function that loads more
-    showLoadMore: React.PropTypes.bool, // Whether there's more to load (Show the button)
-
-    toggleSelection: React.PropTypes.func, // Function that selects or unselects tab
+    select: React.PropTypes.func, // Function that selects or unselects tab
     selection: React.PropTypes.object.isRequired // Selected tabs
 };
 

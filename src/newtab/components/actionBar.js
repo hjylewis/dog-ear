@@ -68,7 +68,7 @@ class ActionBar extends React.Component {
     deleteAll () {
         Object.keys(this.props.selection).forEach((id) => {
             var tab = this.props.selection[id];
-            this.props.toggleSelection(tab);
+            this.props.select(tab);
             tab.remove();
         });
     }
@@ -77,7 +77,7 @@ class ActionBar extends React.Component {
         Object.keys(this.props.selection).forEach((id) => {
             var tab = this.props.selection[id];
 
-            this.props.toggleSelection(tab);
+            this.props.select(tab);
         });
     }
 
@@ -95,7 +95,7 @@ class ActionBar extends React.Component {
 }
 
 ActionBar.propTypes = {
-    toggleSelection: React.PropTypes.func, // Function that selects or unselects tab
+    select: React.PropTypes.func, // Function that selects or unselects tab
     openTabs: React.PropTypes.func, // Function that opens tabs
     selection: React.PropTypes.object.isRequired // Selected tabs
 };
