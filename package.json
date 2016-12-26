@@ -37,6 +37,8 @@
     "sass-loader": "^4.1.1",
     "style-loader": "^0.13.1",
     "svg-react-loader": "^0.3.7",
+    "svgo": "^0.7.1",
+    "svgo-loader": "git+https://github.com/hjylewis/svgo-loader.git",
     "webpack": "^1.14.0"
   },
   "dependencies": {

@@ -27,7 +27,19 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                loaders: ['babel?presets[]=es2015,presets[]=react', 'svg-react']
+                loaders: [
+                    'babel?presets[]=es2015,presets[]=react',
+                    'svg-react',
+                    'svgo?' + JSON.stringify({
+                        plugins: [
+                            {
+                                cleanupIDs: {
+                                    prefix: '[name]-'
+                                }
+                            }
+                        ]
+                    })
+                ]
             }
         ]
     },
