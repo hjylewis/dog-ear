@@ -22,7 +22,7 @@ class App extends React.Component {
         this.loadMore = this.loadMore.bind(this);
         this.onScroll = this.onScroll.bind(this);
         this.openTabs = this.openTabs.bind(this);
-        this.toggleSelection = this.toggleSelection.bind(this);
+        this.select = this.select.bind(this);
     }
 
     componentDidMount () {
@@ -78,9 +78,12 @@ class App extends React.Component {
         });
     }
 
-    toggleSelection (tab) {
+    // Works like a toggle when force is not defined
+    select (tab, force) {
         var selection = this.state.selection;
-        if (tab.url in selection) {
+
+        if ((tab.url in selection && force === undefined) ||
+            force === false) {
             delete selection[tab.url];
         } else {
             selection[tab.url] = tab;
@@ -103,12 +106,12 @@ class App extends React.Component {
                     groups={this.state.groups}
                     openTabs={this.openTabs}
 
-                    toggleSelection={this.toggleSelection}
+                    select={this.select}
                     selection={this.state.selection}
                 />
                 { Object.keys(this.state.selection).length > 0 ?
                     <ActionBar
-                        toggleSelection={this.toggleSelection}
+                        select={this.select}
                         openTabs={this.openTabs}
                         selection={this.state.selection}
                     /> :

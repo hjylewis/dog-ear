@@ -9,18 +9,18 @@ class Icon extends React.Component {
     constructor (props) {
         super(props);
 
-        this.toggleSelection = this.toggleSelection.bind(this);
+        this.select = this.select.bind(this);
     }
-    toggleSelection (e) {
+    select (e) {
         e.stopPropagation();
-        this.props.toggleSelection();
+        this.props.select();
     }
 
     render () {
         return (
             <span
                 className={classNames({ 'icon': true, 'selected': this.props.selected })}
-                onClick={this.toggleSelection}
+                onClick={this.select}
             >
                 {this.props.favicon ? <img src={this.props.favicon} className={classNames('favicon')}/> : ''}
                 <CheckedIcon className={classNames('checked-icon')}/>
@@ -33,7 +33,7 @@ class Icon extends React.Component {
 Icon.propTypes = {
     favicon: React.PropTypes.string,
     selected: React.PropTypes.bool,
-    toggleSelection: React.PropTypes.func
+    select: React.PropTypes.func
 };
 
 class Tab extends React.Component {
@@ -43,7 +43,7 @@ class Tab extends React.Component {
                 <Icon
                     favicon={this.props.data.favicon}
                     selected={this.props.selected}
-                    toggleSelection={this.props.toggleSelection}
+                    select={this.props.select}
                 />
                 <span className={classNames('info')} onClick={this.props.openTab}>
                     <span className={classNames('title')}>
@@ -62,7 +62,7 @@ Tab.propTypes = {
     data: React.PropTypes.object.isRequired,
     openTab: React.PropTypes.func,
     selected: React.PropTypes.bool,
-    toggleSelection: React.PropTypes.func
+    select: React.PropTypes.func
 };
 
 export default Tab;
