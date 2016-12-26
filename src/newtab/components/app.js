@@ -80,6 +80,9 @@ class App extends React.Component {
 
         return (
             <div>
+                <div className="header">
+                    <h1>Dog Ears</h1>
+                </div>
                 <List
                     tabs={this.state.tabs}
                     openTabs={this.openTabs}
