@@ -7,8 +7,6 @@
 
     overflow: hidden;
 
-    cursor: pointer;
-
     &:hover {
         background-color: rgba(0, 0, 0, 0.05);
     }
@@ -30,6 +28,8 @@ $icon-size: 21.25px;
     position: relative;
     width: $icon-size;
     height: $icon-size;
+
+    cursor: pointer;
 
     .favicon {
         width: $icon-size;
@@ -93,8 +93,10 @@ $icon-size: 21.25px;
 
 
 .info {
-    flex: 0 1 auto;
-    
+    flex: 1 1 auto;
+
+    cursor: pointer;
+
     .title {
 
     }

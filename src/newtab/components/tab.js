@@ -39,13 +39,13 @@ Icon.propTypes = {
 class Tab extends React.Component {
     render () {
         return (
-            <div className={classNames('tab')} onClick={this.props.openTab}>
+            <div className={classNames('tab')} >
                 <Icon
                     favicon={this.props.data.favicon}
                     selected={this.props.selected}
                     toggleSelection={this.props.toggleSelection}
                 />
-                <span className={classNames('info')}>
+                <span className={classNames('info')} onClick={this.props.openTab}>
                     <span className={classNames('title')}>
                         {this.props.data.title}
                     </span>
