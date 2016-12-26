@@ -4,7 +4,7 @@ import Storage from '../../services/storage/index';
 import List from './list';
 import ActionBar from './actionBar';
 
-const PAGE_SIZE = 20;
+const PAGE_SIZE = 30;
 
 class App extends React.Component {
     constructor (props) {
@@ -18,6 +18,7 @@ class App extends React.Component {
         };
 
         this.loadMore = this.loadMore.bind(this);
+        this.onScroll = this.onScroll.bind(this);
         this.openTabs = this.openTabs.bind(this);
         this.toggleSelection = this.toggleSelection.bind(this);
     }
@@ -36,8 +37,18 @@ class App extends React.Component {
     }
 
     loadMore () {
-        this.tabNumber += PAGE_SIZE;
-        this.loadTabs();
+        if (this.state.tabs.length === this.tabNumber) {
+            this.tabNumber += PAGE_SIZE;
+            this.loadTabs();
+        }
+    }
+
+    onScroll (e) {
+        var distanceFromBottom = e.target.scrollHeight - (e.target.scrollTop + e.target.clientHeight);
+
+        if (distanceFromBottom < 50) {
+            this.loadMore();
+        }
     }
 
     openTabs (tabs) {
@@ -79,15 +90,13 @@ class App extends React.Component {
         console.log(this.state.tabs);
 
         return (
-            <div>
+            <div className="app" onScroll={this.onScroll}>
                 <div className="header">
                     <h1>Dog Ears</h1>
                 </div>
                 <List
                     tabs={this.state.tabs}
                     openTabs={this.openTabs}
-                    loadMore={this.loadMore}
-                    showLoadMore={this.state.tabs.length === this.tabNumber}
 
                     toggleSelection={this.toggleSelection}
                     selection={this.state.selection}
