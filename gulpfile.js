@@ -6,21 +6,21 @@ var webpack = require('gulp-webpack');
 
 gulp.task('cleanup', function () {
     return del([
-        'dist/**/*'
+        'package/dist/**/*'
     ]);
 });
 
 gulp.task('webpack', function() {
     return gulp.src('src/entry.js')
         .pipe(webpack( require('./webpack.config.js') ))
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('package/dist/'));
 });
 
 gulp.watch('src/**/*[.js|.scss]', ['webpack']);
 
 gulp.task('copy', function() {
     return gulp.src('src/**/*.html')
-        .pipe(gulp.dest('dist/'));
+        .pipe(gulp.dest('package/dist/'));
 });
 
 gulp.watch('src/**/*.html', ['copy']);

@@ -8,7 +8,7 @@ module.exports = {
     },
 
     output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: path.join(__dirname, 'package/dist'),
         filename: '[name]',
         publicPath: ''
     },
