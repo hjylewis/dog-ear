@@ -1,3 +1,4 @@
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var path = require('path');
 
 module.exports = {
@@ -12,6 +13,10 @@ module.exports = {
         publicPath: ''
     },
 
+    plugins: [
+        new ExtractTextPlugin('newtab/styles.css')
+    ],
+
     module: {
         loaders: [
             {
@@ -23,7 +28,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                loaders: ['style', 'css?sourceMap', 'sass?sourceMap']
+                loader: ExtractTextPlugin.extract(['css?sourceMap', 'sass?sourceMap'])
             },
             {
                 test: /\.svg$/,
