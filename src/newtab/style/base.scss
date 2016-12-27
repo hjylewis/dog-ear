@@ -1,11 +1,33 @@
 body {
-    // font-family: "Helvetica", "Arial", sans-serif;
+    font-family: "Helvetica Neue", "Lucida Grande", sans-serif;
     color: $text-color;
     background-color: $background-color;
 
     font-size: 15px;
 
+    line-height: normal;
+
     margin: 0;
+}
+
+h1 {
+    display: block;
+    font-size: 2em;
+    -webkit-margin-before: 0.67em;
+    -webkit-margin-after: 0.67em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    font-weight: bold;
 }
 
 button {

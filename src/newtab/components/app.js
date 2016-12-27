@@ -5,6 +5,8 @@ import TimeGrouping from '../../services/timeGrouping';
 import List from './list';
 import ActionBar from './actionBar';
 
+import DogLogo from '../assets/Dog.svg';
+
 const PAGE_SIZE = 40;
 
 class App extends React.Component {
@@ -100,7 +102,10 @@ class App extends React.Component {
         return (
             <div className="app" onScroll={this.onScroll}>
                 <div className="header">
-                    <h1>Dog Ears</h1>
+                    <div className="content">
+                        <DogLogo className="dog-logo"/>
+                        <h1>Your Dog Ears</h1>
+                    </div>
                 </div>
                 <List
                     groups={this.state.groups}
