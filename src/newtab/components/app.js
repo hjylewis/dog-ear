@@ -97,8 +97,6 @@ class App extends React.Component {
     }
 
     render () {
-        console.log(this.state.tabs);
-
         return (
             <div className="app" onScroll={this.onScroll}>
                 <div className="header">
