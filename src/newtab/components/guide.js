@@ -3,11 +3,11 @@ import Tab from '../../services/tab';
 
 import OpenTabs from './openTabs';
 
-const WARNING_NUM = 10;
+const WARNING_NUM = 15;
 
 const emptyMessage = 'This is empty.  You currently have no dog ears saved.  Start dog earing tabs using the button on the top right of your browser.';
 const emptyOpenTabs = 'This is empty.  You currently have no dog ears saved.  Start by dog earing some of your open tabs.  Click the icons to select.';
-const tooManyOpenTabs = '';
+const tooManyOpenTabs = `You have more than ${WARNING_NUM} tabs open.  Why don\'t you dog ear the tabs you aren\'t using right now.   Click the icons to select.`;
 
 class Guide extends React.Component {
     constructor (props) {
