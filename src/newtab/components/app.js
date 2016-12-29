@@ -3,7 +3,7 @@ import Storage from '../../services/storage/index';
 import TimeGrouping from '../../services/timeGrouping';
 
 import List from './list';
-import OpenTabs from './openTabs';
+import Guide from './Guide';
 import ActionBar from './actionBar';
 
 import DogLogo from '../assets/Dog.svg';
@@ -17,7 +17,7 @@ class App extends React.Component {
         this.tabNumber = PAGE_SIZE;
 
         this.state = {
-            tabs: [],
+            tabs: null,
             groups: [],
             selection: {}
         };
@@ -45,7 +45,7 @@ class App extends React.Component {
     }
 
     loadMore () {
-        if (this.state.tabs.length === this.tabNumber) {
+        if (this.state.tabs && this.state.tabs.length === this.tabNumber) {
             this.tabNumber += PAGE_SIZE;
             this.loadTabs();
         }
@@ -108,7 +108,10 @@ class App extends React.Component {
                     </div>
                 </div>
                 <div className="app-content">
-                    <OpenTabs />
+                    <Guide
+                        tabsLoaded={!!this.state.tabs}
+                        tabNumber={this.state.tabs ? this.state.tabs.length : 0}
+                    />
                     <List
                         groups={this.state.groups}
                         openTabs={this.openTabs}

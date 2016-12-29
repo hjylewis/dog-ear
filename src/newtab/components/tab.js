@@ -48,7 +48,7 @@ class Tab extends React.Component {
                     selected={this.props.selected}
                     select={this.props.select}
                 />
-                <span className={classNames('info')} onClick={this.props.openTab}>
+                <span className={classNames('tab-info')} onClick={this.props.openTab}>
                     <span className={classNames('title')}>
                         {this.props.data.title}
                     </span>
