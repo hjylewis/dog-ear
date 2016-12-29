@@ -39,7 +39,10 @@ Icon.propTypes = {
 class Tab extends React.Component {
     render () {
         return (
-            <div className={classNames('tab')} >
+            <div className={classNames({
+                'tab': true,
+                'no-highlight': !this.props.openTab
+            })} >
                 <Icon
                     favicon={this.props.data.favicon}
                     selected={this.props.selected}
@@ -61,8 +64,8 @@ class Tab extends React.Component {
 Tab.propTypes = {
     data: React.PropTypes.object.isRequired,
     openTab: React.PropTypes.func,
-    selected: React.PropTypes.bool,
-    select: React.PropTypes.func
+    selected: React.PropTypes.bool.isRequired,
+    select: React.PropTypes.func.isRequired
 };
 
 export default Tab;

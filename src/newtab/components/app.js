@@ -3,6 +3,7 @@ import Storage from '../../services/storage/index';
 import TimeGrouping from '../../services/timeGrouping';
 
 import List from './list';
+import OpenTabs from './openTabs';
 import ActionBar from './actionBar';
 
 import DogLogo from '../assets/Dog.svg';
@@ -66,15 +67,14 @@ class App extends React.Component {
             var count = 0;
 
             tabs.forEach((tab) => {
-                chrome.tabs.create({ url: tab.url }, () => {
-                    tab.remove().then(() => {
-                        count++;
+                tab.remove().then(() => {
+                    count++;
+                    chrome.tabs.create({ url: tab.url });
 
-                        // If last one
-                        if (count === tabs.length) {
-                            chrome.tabs.remove(currentTab.id);
-                        }
-                    });
+                    // If last one
+                    if (count === tabs.length) {
+                        chrome.tabs.remove(currentTab.id);
+                    }
                 });
             });
         });
@@ -102,18 +102,21 @@ class App extends React.Component {
         return (
             <div className="app" onScroll={this.onScroll}>
                 <div className="header">
-                    <div className="content">
+                    <div className="header-content">
                         <DogLogo className="dog-logo"/>
                         <h1>Your Dog Ears</h1>
                     </div>
                 </div>
-                <List
-                    groups={this.state.groups}
-                    openTabs={this.openTabs}
+                <div className="app-content">
+                    <OpenTabs />
+                    <List
+                        groups={this.state.groups}
+                        openTabs={this.openTabs}
 
-                    select={this.select}
-                    selection={this.state.selection}
-                />
+                        select={this.select}
+                        selection={this.state.selection}
+                    />
+                </div>
                 { Object.keys(this.state.selection).length > 0 ?
                     <ActionBar
                         select={this.select}

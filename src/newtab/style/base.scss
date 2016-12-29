@@ -31,7 +31,18 @@ h3 {
 }
 
 button {
-    background: none;
-    border: 0;
     cursor: pointer;
+
+    padding: 10px 15px;
+    margin: 0 10px;
+
+    background: white;
+
+    border: 2px solid currentColor;
+    border-radius: 10px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    transition: all 0.2s ease-in-out;
 }

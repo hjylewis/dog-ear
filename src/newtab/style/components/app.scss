@@ -2,3 +2,8 @@
     height: 100vh;
     overflow: scroll;
 }
+
+.app-content {
+    margin: 80px auto;
+    width: $app-width;
+}

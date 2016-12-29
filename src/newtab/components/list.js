@@ -58,7 +58,7 @@ class List extends React.Component {
                         key={tab.url}
                         data={tab}
                         selected={tab.url in this.props.selection}
-                        openTab={this.props.openTabs.bind(null, tab)}
+                        openTab={this.props.openTabs ? this.props.openTabs.bind(null, tab) : null}
                         select={this.props.select.bind(null, tab)}
                     />
                 );
@@ -77,7 +77,7 @@ List.propTypes = {
     groups: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // Array of groups
     openTabs: React.PropTypes.func, // Function that opens tab
 
-    select: React.PropTypes.func, // Function that selects or unselects tab
+    select: React.PropTypes.func.isRequired, // Function that selects or unselects tab
     selection: React.PropTypes.object.isRequired // Selected tabs
 };
 

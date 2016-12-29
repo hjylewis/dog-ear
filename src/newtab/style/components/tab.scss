@@ -7,8 +7,14 @@
 
     overflow: hidden;
 
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.05);
+    &:not(.no-highlight) {
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        .info {
+            cursor: pointer;
+        }
     }
 
     span {
@@ -94,8 +100,6 @@ $icon-size: 21.25px;
 
 .info {
     flex: 1 1 auto;
-
-    cursor: pointer;
 
     .title {
 
