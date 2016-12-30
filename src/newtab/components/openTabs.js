@@ -4,6 +4,40 @@ import classNames from 'classnames';
 import List from './list';
 
 class OpenTabs extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.state  = {
+            selection: {}
+        };
+
+        this.select = this.select.bind(this);
+        this.onClick = this.onClick.bind(this);
+    }
+
+    select (tab, force) {
+        var selection = this.state.selection;
+
+        if ((tab.url in selection && force === undefined) ||
+            force === false) {
+            delete selection[tab.url];
+        } else {
+            selection[tab.url] = tab;
+        }
+
+        this.setState({
+            selection: selection
+        });
+    }
+
+    onClick () {
+        var selection = Object.keys(this.state.selection).map((url) => {
+            return this.state.selection[url];
+        });
+
+        this.props.onClick(selection);
+    }
+
     render () {
         return (
             <div className="open-tabs">
@@ -12,16 +46,16 @@ class OpenTabs extends React.Component {
                         group: 'Open Tabs (' + this.props.openTabs.length + ')',
                         tabs: this.props.openTabs
                     }]}
-                    select={this.props.select}
-                    selection={this.props.selection}
+                    select={this.select}
+                    selection={this.state.selection}
                 />
                 <button
                     className={classNames({
                         'save-btn': true,
-                        'active': Object.keys(this.props.selection).length > 0
+                        'active': Object.keys(this.state.selection).length > 0
                     })}
-                    onClick={this.props.onClick}
-                    >
+                    onClick={this.onClick}
+                >
                     Dog Ear
                 </button>
             </div>
@@ -31,8 +65,6 @@ class OpenTabs extends React.Component {
 
 OpenTabs.propTypes = {
     openTabs: React.PropTypes.array.isRequired,
-    select: React.PropTypes.func.isRequired,
-    selection: React.PropTypes.object.isRequired,
     onClick: React.PropTypes.func.isRequired
 };
 

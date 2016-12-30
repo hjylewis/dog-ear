@@ -14,13 +14,11 @@ class Guide extends React.Component {
         super(props);
 
         this.state = {
-            openTabs: [],
-            selection: {}
+            openTabs: []
         };
 
         this.tabMap = {}; // Maps url to chrome tab id
 
-        this.select = this.select.bind(this);
         this.onClick = this.onClick.bind(this);
     }
 
@@ -49,32 +47,15 @@ class Guide extends React.Component {
         });
     }
 
-    select (tab, force) {
-        var selection = this.state.selection;
-
-        if ((tab.url in selection && force === undefined) ||
-            force === false) {
-            delete selection[tab.url];
-        } else {
-            selection[tab.url] = tab;
-        }
-
-        this.setState({
-            selection: selection
-        });
-    }
-
-    onClick () {
+    onClick (selection) {
         var count = 0;
-        var selectedUrls = Object.keys(this.state.selection);
-        selectedUrls.forEach((url) => {
-            var tab = this.state.selection[url];
-            var tabID = this.tabMap[url];
+        selection.forEach((tab) => {
+            var tabID = this.tabMap[tab.url];
 
             tab.add().then(() => {
                 chrome.tabs.remove(tabID, () => {
                     count++;
-                    if (count === selectedUrls.length) {
+                    if (count === selection.length) {
                         this.getOpenTabs();
                     }
                 });
@@ -123,8 +104,6 @@ class Guide extends React.Component {
                 <OpenTabs
                     key='open-tabs'
                     openTabs={this.state.openTabs}
-                    select={this.select}
-                    selection={this.state.selection}
                     onClick={this.onClick}
                 />
             );
