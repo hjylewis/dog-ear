@@ -1,5 +1,7 @@
 import Tab from '../services/tab';
 
+const NEWTAB_URL = 'chrome://newtab';
+
 // Browser Action Click
 chrome.browserAction.onClicked.addListener((tab) => {
     if (!tab.id || tab.id === chrome.tabs.TAB_ID_NONE) {
@@ -11,10 +13,20 @@ chrome.browserAction.onClicked.addListener((tab) => {
         title: tab.title,
         favicon: tab.favIconUrl
     });
+    chrome.tabs.query({windowId: chrome.windows.WINDOW_ID_CURRENT }, (tabs) => {
+        var tabNum = tabs.length;
 
-    toStore.add().then(() => {
-        chrome.tabs.remove(tab.id);
+        // If we are removing the last tab
+        if (tabNum === 1) {
+            chrome.tabs.create({ url:  NEWTAB_URL});
+        }
+
+        toStore.add().then(() => {
+            chrome.tabs.remove(tab.id);
+        });
     });
+
+
 });
 
 // Add menu items
@@ -27,6 +39,8 @@ chrome.contextMenus.create({
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === 'all_tabs') {
         chrome.tabs.query({windowId: tab.windowId}, (tabs) => {
+            chrome.tabs.create({ url:  NEWTAB_URL});
+
             tabs.forEach((tab) => {
                 var toStore = Tab.create({
                     url: tab.url,
