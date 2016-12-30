@@ -28,9 +28,12 @@ class Guide extends React.Component {
 
     getOpenTabs () {
         chrome.tabs.query({windowId: chrome.windows.WINDOW_ID_CURRENT }, (tabs) => {
+            this.tabMap = {};
+
             // Remove New Tab
             tabs = tabs.filter((tab) => tab.url !== 'chrome://newtab/');
 
+            // Convert to Tab types
             tabs = tabs.map((tab) => {
                 this.tabMap[tab.url] = tab.id;
 
