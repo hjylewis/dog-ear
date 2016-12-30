@@ -19,7 +19,7 @@ class Guide extends React.Component {
 
         this.tabMap = {}; // Maps url to chrome tab id
 
-        this.onClick = this.onClick.bind(this);
+        this.saveTabs = this.saveTabs.bind(this);
     }
 
     componentDidMount () {
@@ -47,15 +47,15 @@ class Guide extends React.Component {
         });
     }
 
-    onClick (selection) {
+    saveTabs (tabs) {
         var count = 0;
-        selection.forEach((tab) => {
+        tabs.forEach((tab) => {
             var tabID = this.tabMap[tab.url];
 
             tab.add().then(() => {
                 chrome.tabs.remove(tabID, () => {
                     count++;
-                    if (count === selection.length) {
+                    if (count === tabs.length) {
                         this.getOpenTabs();
                     }
                 });
@@ -104,7 +104,7 @@ class Guide extends React.Component {
                 <OpenTabs
                     key='open-tabs'
                     openTabs={this.state.openTabs}
-                    onClick={this.onClick}
+                    saveTabs={this.saveTabs}
                 />
             );
         }

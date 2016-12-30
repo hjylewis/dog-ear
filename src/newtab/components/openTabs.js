@@ -35,7 +35,7 @@ class OpenTabs extends React.Component {
             return this.state.selection[url];
         });
 
-        this.props.onClick(selection);
+        this.props.saveTabs(selection);
     }
 
     render () {
@@ -65,7 +65,7 @@ class OpenTabs extends React.Component {
 
 OpenTabs.propTypes = {
     openTabs: React.PropTypes.array.isRequired,
-    onClick: React.PropTypes.func.isRequired
+    saveTabs: React.PropTypes.func.isRequired
 };
 
 export default OpenTabs;
