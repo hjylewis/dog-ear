@@ -3,7 +3,7 @@ import classNames from 'classnames';
 
 import CheckedIcon from '../assets/Checked.svg';
 import UncheckedIcon from '../assets/Unchecked.svg';
-
+import FileIcon from '../assets/File.svg';
 
 class Icon extends React.Component {
     constructor (props) {
@@ -22,7 +22,10 @@ class Icon extends React.Component {
                 className={classNames({ 'icon': true, 'selected': this.props.selected })}
                 onClick={this.select}
             >
-                {this.props.favicon ? <img src={this.props.favicon} className={classNames('favicon')}/> : ''}
+                {this.props.favicon ?
+                    <img src={this.props.favicon} className={classNames('favicon')}/> :
+                    <FileIcon className={classNames('favicon')}/>
+                }
                 <CheckedIcon className={classNames('checked-icon')}/>
                 <UncheckedIcon className={classNames('unchecked-icon')}/>
             </span>

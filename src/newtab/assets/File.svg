@@ -1,0 +1,17 @@
+<svg width="223" height="301" viewBox="0 0 223 301" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:figma="http://www.figma.com/figma/ns">
+<title>File</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-795 190)" figma:type="canvas">
+<mask id="mask0_alpha" mask-type="alpha">
+<path d="M 795 -190L 1018 -190L 1018 111L 795 111L 795 -190Z" fill="#FFFFFF"/>
+</mask>
+<g id="File" style="mix-blend-mode:normal;" mask="url(#mask0_alpha)" figma:type="frame">
+<g id="Vector 6" style="mix-blend-mode:normal;" figma:type="vector">
+<use xlink:href="#path0_stroke" transform="translate(821 -162)" fill="#363843" fill-opacity="0.45" style="mix-blend-mode:normal;"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 0 0L 0 -10L -10 -10L -10 0L 0 0ZM 0 244L -10 244L -10 254L 0 254L 0 244ZM 175 244L 175 254L 185 254L 185 244L 175 244ZM 175 84L 185 84L 185 80.3008L 182.593 77.4921L 175 84ZM 103 0L 110.593 -6.50791L 107.599 -10L 103 -10L 103 0ZM 103 84L 93 84L 93 94L 103 94L 103 84ZM -10 0L -10 244L 10 244L 10 0L -10 0ZM 0 254L 175 254L 175 234L 0 234L 0 254ZM 185 244L 185 84L 165 84L 165 244L 185 244ZM 182.593 77.4921L 110.593 -6.50791L 95.4074 6.50791L 167.407 90.5079L 182.593 77.4921ZM 103 -10L 0 -10L 0 10L 103 10L 103 -10ZM 93 0L 93 84L 113 84L 113 0L 93 0ZM 103 94L 175 94L 175 74L 103 74L 103 94Z"/>
+</defs>
+</svg>
