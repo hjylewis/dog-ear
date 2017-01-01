@@ -11,6 +11,35 @@ const reservedIDs = [TAB_ARRAY_KEY, SETTINGS_KEY];
 class Storage {
     constructor () {
         this.lock = new AsyncLock();
+
+        if (typeof chrome !== 'undefined') {
+            // Check for orphans
+            Promise.all([
+                this.size({ excludeReserved: true }),
+                this._getTabIDs()
+            ]).then((res) => {
+                var size = res[0];
+                var tabIDs = res[1];
+
+                if (tabIDs.length !== size) {
+                    return this.cleanUpOrphans();
+                }
+            });
+        }
+    }
+
+    size (options = {}) {
+        var { excludeReserved } = options;
+
+        return Connection.get(null).then((store) => {
+            if (excludeReserved) {
+                reservedIDs.forEach((id) => {
+                    delete store[id];
+                });
+            }
+
+            return Object.keys(store).length;
+        });
     }
 
     getTab (url) {
@@ -24,6 +53,17 @@ class Storage {
             var recent = tabIDs.splice(-1 * num);
             return Connection.get(recent).then(items => {
                 return recent.reverse().map((url) => {
+                    return Tab.create(items[url]);
+                });
+            });
+        });
+    }
+
+    getOldestTabs (num = DEFAULT_RECENT_NUM) {
+        return this._getTabIDs().then(tabIDs => {
+            var oldest = tabIDs.splice(0, num);
+            return Connection.get(oldest).then(items => {
+                return oldest.map((url) => {
                     return Tab.create(items[url]);
                 });
             });
@@ -85,6 +125,14 @@ class Storage {
 
             return Promise.all(orphans.map((orphan) => {
                 return Connection.delete(orphan);
+            }));
+        });
+    }
+
+    clearUpSpace (num) {
+        return this.getOldestTabs(num).then(tabs => {
+            return Promise.all(tabs.map(tab => {
+                return tab.remove();
             }));
         });
     }
