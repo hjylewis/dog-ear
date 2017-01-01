@@ -6,6 +6,10 @@ class MockConnection {
     }
 
     get (key) {
+        if (key === null) {
+            return Promise.resolve(Object.assign({}, this.store));
+        }
+
         var ret = {};
         var keys = [];
 

@@ -63,6 +63,20 @@ describe('StorageService', function() {
             });
         });
 
+        it('should not add tab with reserved id', function(done) {
+            setStore({});
+            var tab = Tab.create({
+                url: TAB_ARRAY_KEY
+            });
+
+            Storage.addTab(tab).then(() => {
+                done('Should not reach');
+            }).catch((err) => {
+                assert.isDefined(err);
+                done();
+            });
+        });
+
         it('should add tab id to array', function(done) {
             var mock = setStore({});
             var tab = Tab.create({
@@ -207,6 +221,28 @@ describe('StorageService', function() {
                 done(err);
             });
         });
+    });
 
+    describe('#cleanUpOrphans()', function() {
+        it('should remove orphans in store', function(done) {
+            var mock = setStore({
+                'orphan': {}
+            });
+
+            var tab = Tab.create({
+                url: 'url'
+            });
+
+            Storage.addTab(tab).then(() => {
+                return Storage.cleanUpOrphans();
+            }).then(() => {
+                assert.property(mock.getStore(), 'url', 'non-orphan is still in store');
+                assert.property(mock.getStore(), TAB_ARRAY_KEY, 'reserved id is still in store');
+                assert.notProperty(mock.getStore(), 'orphan', 'orphan is no longer in store');
+                done();
+            }).catch((err) => {
+                done(err);
+            });
+        });
     });
 });
