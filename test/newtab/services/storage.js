@@ -115,6 +115,28 @@ describe('StorageService', function() {
                 done(err);
             });
         });
+
+        it('should be limited to max items limit', function(done) {
+            var mock = setStore({});
+
+            var tabs = [];
+            for (let i = 0; i < mock.MAX_ITEMS + 100; i++) {
+                tabs.push(
+                    Tab.create({
+                        url: i.toString()
+                    })
+                );
+            }
+            Promise.all(
+                tabs.map((tab) => Storage.addTab(tab))
+            ).then(() => {
+                var store = mock.getStore();
+                assert.isAtMost(Object.keys(store).length, mock.MAX_ITEMS, 'store size should be capped');
+                done();
+            }).catch((err) => {
+                done(err);
+            });
+        });
     });
 
     describe('#removeTab()', function() {
@@ -244,5 +266,13 @@ describe('StorageService', function() {
                 done(err);
             });
         });
+    });
+
+    describe('#size()', function() {
+        //TODO
+    });
+
+    describe('#clearUpSpace()', function() {
+        //TODO
     });
 });

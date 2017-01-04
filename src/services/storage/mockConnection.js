@@ -3,6 +3,8 @@
 class MockConnection {
     constructor (store) {
         this.store = store;
+
+        this.MAX_ITEMS = 512;
     }
 
     get (key) {

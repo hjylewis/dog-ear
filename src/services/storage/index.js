@@ -30,14 +30,12 @@ class Storage {
 
     size (options = {}) {
         var { excludeReserved } = options;
-
         return Connection.get(null).then((store) => {
             if (excludeReserved) {
                 reservedIDs.forEach((id) => {
                     delete store[id];
                 });
             }
-
             return Object.keys(store).length;
         });
     }
@@ -50,7 +48,7 @@ class Storage {
 
     getRecentTabs (num = DEFAULT_RECENT_NUM) {
         return this._getTabIDs().then(tabIDs => {
-            var recent = tabIDs.splice(-1 * num);
+            var recent = tabIDs.slice(-1 * num);
             return Connection.get(recent).then(items => {
                 return recent.reverse().map((url) => {
                     return Tab.create(items[url]);
@@ -61,7 +59,7 @@ class Storage {
 
     getOldestTabs (num = DEFAULT_RECENT_NUM) {
         return this._getTabIDs().then(tabIDs => {
-            var oldest = tabIDs.splice(0, num);
+            var oldest = tabIDs.slice(0, num);
             return Connection.get(oldest).then(items => {
                 return oldest.map((url) => {
                     return Tab.create(items[url]);
@@ -75,18 +73,23 @@ class Storage {
             return Promise.reject(Error.TAB_RESERVED_ID());
         }
 
-        return this.lock.acquire(tab.url, () => {
-            return this.getTab(tab.url).then((oldTab) => {
-                if (oldTab) {
-                    return this.removeTab(oldTab);
-                } else {
-                    return Promise.resolve();
-                }
-            }).then(() => {
-                return Promise.all([
-                    Connection.set(tab.url, tab),
-                    this._addToTabIDs(tab.url)
-                ]);
+        // You can only add one tab at a time
+        // This is because we need to check the size (and possibly clear space)
+        // each time.
+        return this.lock.acquire('ADDED', () => {
+            // Check if more space
+            return this.getSizeAndClearUpSpace(10).then(() => {
+                return this.getTab(tab.url).then((oldTab) => {
+                    if (oldTab) {
+                        return this.removeTab(oldTab);
+                    } else {
+                        return Promise.resolve();
+                    }
+                }).then(() => {
+                    return Connection.set(tab.url, tab);
+                }).then(() => {
+                    return this._addToTabIDs(tab.url);
+                });
             });
         });
     }
@@ -137,6 +140,16 @@ class Storage {
         });
     }
 
+    getSizeAndClearUpSpace (num) {
+        return this.size().then((size) => {
+            if (size >= Connection.MAX_ITEMS) {
+                return this.clearUpSpace(num);
+            } else {
+                return Promise.resolve();
+            }
+        });
+    }
+
     _getTabIDs () {
         return Connection.get(TAB_ARRAY_KEY).then((items) => {
             // If no tab array exists
@@ -163,7 +176,7 @@ class Storage {
             return this._getTabIDs().then((tabArray) => {
                 var idx = tabArray.lastIndexOf(id);
                 if (idx < 0) {
-                    return Promise.reject(Error.TAB_ID_NOT_FOUND());
+                    return Promise.reject(Error.TAB_ID_NOT_FOUND(id));
                 }
 
                 tabArray.splice(idx, 1);
