@@ -51,7 +51,8 @@ class OpenTabs extends React.Component {
                 />
                 <button
                     className={classNames({
-                        'save-btn': true,
+                        'btn': true,
+                        'btn--save': true,
                         'active': Object.keys(this.state.selection).length > 0
                     })}
                     onClick={this.onClick}

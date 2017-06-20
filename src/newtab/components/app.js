@@ -2,6 +2,7 @@ import React from 'react';
 import Storage from '../../services/storage/index';
 import TimeGrouping from '../../services/timeGrouping';
 
+import { ErrorAlert } from './alert';
 import List from './list';
 import Guide from './Guide';
 import ActionBar from './actionBar';
@@ -99,6 +100,7 @@ class App extends React.Component {
     render () {
         return (
             <div className="app" onScroll={this.onScroll}>
+                <ErrorAlert message="Hello, World" />
                 <div className="header">
                     <div className="header-content">
                         <DogLogo className="dog-logo"/>

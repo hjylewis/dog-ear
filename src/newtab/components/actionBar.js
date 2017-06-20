@@ -6,7 +6,7 @@ import CloseIcon from '../assets/Close.svg';
 class OpenBtn extends React.Component {
     render () {
         return (
-            <button className={classNames('open-btn')}  onClick={this.props.action}>
+            <button className={classNames('btn', 'btn--open')}  onClick={this.props.action}>
                 Open ({this.props.count})
             </button>
         );
@@ -21,7 +21,7 @@ OpenBtn.propTypes = {
 class DeleteBtn extends React.Component {
     render () {
         return (
-            <button className={classNames('delete-btn')}  onClick={this.props.action}>
+            <button className={classNames('btn', 'btn--delete')}  onClick={this.props.action}>
                 Delete ({this.props.count})
             </button>
         );

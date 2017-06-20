@@ -30,23 +30,3 @@
         opacity: 1;
     }
 }
-
-.open-btn {
-    color: $primary;
-
-    &:hover {
-        background-color: $primary;
-        border-color: $primary;
-        color: white;
-    }
-}
-
-.delete-btn {
-    color: $warning;
-
-    &:hover {
-        background-color: $warning;
-        border-color: $warning;
-        color: white;
-    }
-}
