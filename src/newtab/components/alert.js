@@ -7,6 +7,9 @@ class Alert extends React.Component {
         return (
             <div className={classNames('alert', this.props.className)}>
                 {this.props.message}
+                <button className={classNames('btn', 'btn--alert')}>
+                    Close
+                </button>
             </div>
         );
     }

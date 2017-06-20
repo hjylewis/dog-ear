@@ -100,8 +100,8 @@ class App extends React.Component {
     render () {
         return (
             <div className="app" onScroll={this.onScroll}>
-                <ErrorAlert message="Hello, World" />
                 <div className="header">
+                    <ErrorAlert message="Hello, World" />
                     <div className="header-content">
                         <DogLogo className="dog-logo"/>
                         <h1>Your Dog Ears</h1>

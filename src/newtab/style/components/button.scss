@@ -1,6 +1,6 @@
 .btn {
-    --color: $primary;
-    color: var(--color);
+    --btn-color: $primary;
+    color: var(--btn-color);
 
     cursor: pointer;
 
@@ -9,7 +9,7 @@
 
     background: white;
 
-    border: 2px solid var(--color);
+    border: 2px solid var(--btn-color);
     border-radius: 10px;
 
     font-size: 12px;
@@ -18,28 +18,43 @@
     transition: all 0.2s ease-in-out;
 
     &:hover {
-        background-color: var(--color);
-        border-color: var(--color);
+        background-color: var(--btn-color);
+        border-color: var(--btn-color);
         color: white;
     }
 }
 
 .btn--open {
-    --color: $primary;
+    --btn-color: $primary;
 }
 
 .btn--delete {
-    --color: $warning;
+    --btn-color: $warning;
 }
 
 .btn--save {
-    --color: $primary;
-    
+    --btn-color: $primary;
+
     float: right;
     margin: 20px;
 
     &:not(.active) {
         opacity: 0.5;
         pointer-events: none;
+    }
+}
+
+.btn--alert {
+    padding: 5px 10px;
+    border-width: 1px;
+    border-radius: 6px;
+
+    --btn-color: white;
+    background-color: var(--alert-color);
+
+    &:hover {
+        background-color: var(--btn-color);
+        border-color: var(--btn-color);
+        color: var(--alert-color);
     }
 }
