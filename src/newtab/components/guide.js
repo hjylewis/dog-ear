@@ -62,7 +62,7 @@ class Guide extends React.Component {
                         this.getOpenTabs();
                     }
                 });
-            });
+            }).catch((error) => this.props.setErrorMessage(error));
         });
     }
 
@@ -122,7 +122,8 @@ class Guide extends React.Component {
 
 Guide.propTypes = {
     tabsLoaded: React.PropTypes.bool.isRequired, // if tabs have been initially loaded
-    tabNumber: React.PropTypes.number.isRequired // number of saved tabs
+    tabNumber: React.PropTypes.number.isRequired, // number of saved tabs
+    setErrorMessage: React.PropTypes.func.isRequired // function to display error message
 };
 
 export default Guide;
