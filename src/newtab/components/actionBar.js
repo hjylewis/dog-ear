@@ -69,7 +69,7 @@ class ActionBar extends React.Component {
         Object.keys(this.props.selection).forEach((id) => {
             var tab = this.props.selection[id];
             this.props.select(tab);
-            tab.remove();
+            tab.remove().catch((error) => this.props.setErrorMessage(error));
         });
     }
 
@@ -97,7 +97,8 @@ class ActionBar extends React.Component {
 ActionBar.propTypes = {
     select: React.PropTypes.func, // Function that selects or unselects tab
     openTabs: React.PropTypes.func, // Function that opens tabs
-    selection: React.PropTypes.object.isRequired // Selected tabs
+    selection: React.PropTypes.object.isRequired, // Selected tabs
+    setErrorMessage: React.PropTypes.func.isRequired // function to display error message
 };
 
 export default ActionBar;

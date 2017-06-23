@@ -139,6 +139,7 @@ class App extends React.Component {
                         select={this.select}
                         openTabs={this.openTabs}
                         selection={this.state.selection}
+                        setErrorMessage={this.setErrorMessage}
                     /> :
                     ''
                 }
