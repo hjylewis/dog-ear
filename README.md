@@ -14,3 +14,8 @@ npm run test
 ```
 npm run production
 ```
+
+## Publish
+```
+npm run publish
+```
