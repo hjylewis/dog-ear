@@ -1,5 +1,8 @@
 class Connection {
     constructor () {
+        if (typeof chrome !== 'undefined') {
+            this.MAX_ITEMS = chrome.storage.sync.MAX_ITEMS;
+        }
         // TODO: check that chrome.storage.sync exits
         // if (!chrome.storage) {
         //     throw Error.NO_STORAGE();

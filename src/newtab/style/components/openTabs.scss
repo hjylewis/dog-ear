@@ -1,20 +1,3 @@
 .open-tabs {
     margin-bottom: 80px;
 }
-
-.save-btn {
-    color: $primary;
-    float: right;
-    margin: 20px;
-
-    &:not(.active) {
-        opacity: 0.5;
-        pointer-events: none;
-    }
-
-    &:hover {
-        background-color: $primary;
-        border-color: $primary;
-        color: white;
-    }
-}

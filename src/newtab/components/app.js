@@ -2,6 +2,7 @@ import React from 'react';
 import Storage from '../../services/storage/index';
 import TimeGrouping from '../../services/timeGrouping';
 
+import { ErrorAlert } from './alert';
 import List from './list';
 import Guide from './Guide';
 import ActionBar from './actionBar';
@@ -18,6 +19,7 @@ class App extends React.Component {
 
         this.state = {
             tabs: null,
+            errorMessage: null,
             groups: [],
             selection: {}
         };
@@ -26,6 +28,7 @@ class App extends React.Component {
         this.onScroll = this.onScroll.bind(this);
         this.openTabs = this.openTabs.bind(this);
         this.select = this.select.bind(this);
+        this.setErrorMessage = this.setErrorMessage.bind(this);
     }
 
     componentDidMount () {
@@ -41,7 +44,7 @@ class App extends React.Component {
                 tabs: tabs,
                 groups: TimeGrouping.createGrouping(tabs)
             });
-        });
+        }).catch((error) => this.setErrorMessage(error));
     }
 
     loadMore () {
@@ -75,7 +78,7 @@ class App extends React.Component {
                     if (count === tabs.length) {
                         chrome.tabs.remove(currentTab.id);
                     }
-                });
+                }).catch((error) => this.setErrorMessage(error));
             });
         });
     }
@@ -96,10 +99,22 @@ class App extends React.Component {
         });
     }
 
+    setErrorMessage (message) {
+        // If Error object
+        if (message && message.message) {
+            message = message.message;
+        }
+
+        this.setState({
+            errorMessage: message
+        });
+    }
+
     render () {
         return (
             <div className="app" onScroll={this.onScroll}>
                 <div className="header">
+                    <ErrorAlert message={this.state.errorMessage} closeAlert={this.setErrorMessage.bind(null,null)} />
                     <div className="header-content">
                         <DogLogo className="dog-logo"/>
                         <h1>Your Dog Ears</h1>
@@ -109,6 +124,7 @@ class App extends React.Component {
                     <Guide
                         tabsLoaded={!!this.state.tabs}
                         tabNumber={this.state.tabs ? this.state.tabs.length : 0}
+                        setErrorMessage={this.setErrorMessage}
                     />
                     <List
                         groups={this.state.groups}
@@ -123,6 +139,7 @@ class App extends React.Component {
                         select={this.select}
                         openTabs={this.openTabs}
                         selection={this.state.selection}
+                        setErrorMessage={this.setErrorMessage}
                     /> :
                     ''
                 }

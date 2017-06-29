@@ -3,9 +3,15 @@
 class MockConnection {
     constructor (store) {
         this.store = store;
+
+        this.MAX_ITEMS = 512;
     }
 
     get (key) {
+        if (key === null) {
+            return Promise.resolve(Object.assign({}, this.store));
+        }
+
         var ret = {};
         var keys = [];
 

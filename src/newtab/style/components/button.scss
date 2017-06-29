@@ -1,0 +1,60 @@
+.btn {
+    --btn-color: $primary;
+    color: var(--btn-color);
+
+    cursor: pointer;
+
+    padding: 10px 15px;
+    margin: 0 10px;
+
+    background: white;
+
+    border: 2px solid var(--btn-color);
+    border-radius: 10px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--btn-color);
+        border-color: var(--btn-color);
+        color: white;
+    }
+}
+
+.btn--open {
+    --btn-color: $primary;
+}
+
+.btn--delete {
+    --btn-color: $warning;
+}
+
+.btn--save {
+    --btn-color: $primary;
+
+    float: right;
+    margin: 20px;
+
+    &:not(.active) {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+}
+
+.btn--alert {
+    padding: 5px 10px;
+    border-width: 1px;
+    border-radius: 6px;
+
+    --btn-color: white;
+    background-color: var(--alert-color);
+
+    &:hover {
+        background-color: var(--btn-color);
+        border-color: var(--btn-color);
+        color: var(--alert-color);
+    }
+}

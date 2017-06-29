@@ -23,7 +23,7 @@ chrome.browserAction.onClicked.addListener((tab) => {
 
         toStore.add().then(() => {
             chrome.tabs.remove(tab.id);
-        });
+        }).catch(displayErrorNotification);
     });
 
 
@@ -50,8 +50,24 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
                 toStore.add().then(() => {
                     chrome.tabs.remove(tab.id);
-                });
+                }).catch(displayErrorNotification);
             });
         });
     }
 });
+
+// Error notifications
+
+function displayErrorNotification (message) {
+    // If Error object
+    if (message && message.message) {
+        message = message.message;
+    }
+
+    chrome.notifications.create('ERROR', {
+        type: 'basic',
+        iconUrl: 'icons/icon-48.png',
+        title: 'Error',
+        message: message
+    });
+}

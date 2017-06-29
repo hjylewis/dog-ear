@@ -6,7 +6,7 @@ import CloseIcon from '../assets/Close.svg';
 class OpenBtn extends React.Component {
     render () {
         return (
-            <button className={classNames('open-btn')}  onClick={this.props.action}>
+            <button className={classNames('btn', 'btn--open')}  onClick={this.props.action}>
                 Open ({this.props.count})
             </button>
         );
@@ -21,7 +21,7 @@ OpenBtn.propTypes = {
 class DeleteBtn extends React.Component {
     render () {
         return (
-            <button className={classNames('delete-btn')}  onClick={this.props.action}>
+            <button className={classNames('btn', 'btn--delete')}  onClick={this.props.action}>
                 Delete ({this.props.count})
             </button>
         );
@@ -69,7 +69,7 @@ class ActionBar extends React.Component {
         Object.keys(this.props.selection).forEach((id) => {
             var tab = this.props.selection[id];
             this.props.select(tab);
-            tab.remove();
+            tab.remove().catch((error) => this.props.setErrorMessage(error));
         });
     }
 
@@ -97,7 +97,8 @@ class ActionBar extends React.Component {
 ActionBar.propTypes = {
     select: React.PropTypes.func, // Function that selects or unselects tab
     openTabs: React.PropTypes.func, // Function that opens tabs
-    selection: React.PropTypes.object.isRequired // Selected tabs
+    selection: React.PropTypes.object.isRequired, // Selected tabs
+    setErrorMessage: React.PropTypes.func.isRequired // function to display error message
 };
 
 export default ActionBar;

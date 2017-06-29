@@ -1,0 +1,15 @@
+.alert {
+    --alert-color: $primary;
+    background-color: var(--alert-color);
+
+    color: white;
+    padding: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.alert--error {
+    --alert-color: $warning;
+}

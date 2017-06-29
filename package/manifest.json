@@ -21,7 +21,8 @@
     "permissions": [
         "tabs",
         "storage",
-        "contextMenus"
+        "contextMenus",
+        "notifications"
     ],
 
     "chrome_url_overrides" : {
