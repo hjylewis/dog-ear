@@ -4,7 +4,8 @@
   "description": "A chrome extension to temporarily bookmark tabs to declutter your browser",
   "main": "manifest.json",
   "scripts": {
-    "start": "gulp",
+    "start": "NODE_ENV=dev gulp",
+    "production": "NODE_ENV=production gulp",
     "test": "NODE_ENV=testing ./node_modules/mocha/bin/mocha --recursive --compilers js:babel-core/register"
   },
   "repository": {
@@ -40,7 +41,8 @@
     "svg-react-loader": "^0.3.7",
     "svgo": "^0.7.1",
     "svgo-loader": "git+https://github.com/hjylewis/svgo-loader.git",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-merge": "^4.1.0"
   },
   "dependencies": {
     "async-lock": "^0.3.9",
