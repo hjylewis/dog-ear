@@ -3,7 +3,6 @@
     "name": "Dog Ear",
     "author": "hjylewis",
     "version": "1.0.0",
-
     "description": "A chrome extension to temporarily bookmark tabs to declutter your browser",
     "icons": {
         "16": "icons/icon-16.png",
@@ -12,25 +11,23 @@
         "48": "icons/icon-48.png",
         "128": "icons/icon-128.png"
     },
-
     "browser_action": {
         "default_icon": {},
         "default_title": "Dog Ear this tab"
     },
-
     "permissions": [
         "tabs",
         "storage",
         "contextMenus",
         "notifications"
     ],
-
-    "chrome_url_overrides" : {
+    "chrome_url_overrides": {
         "newtab": "dist/newtab/index.html"
     },
-
     "background": {
-        "scripts": ["dist/popup/bundle.js"],
+        "scripts": [
+            "dist/popup/bundle.js"
+        ],
         "persistent": false
     }
 }

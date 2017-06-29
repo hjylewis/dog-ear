@@ -4,6 +4,7 @@ var gulp = require('gulp');
 var gulpSequence = require('gulp-sequence');
 var del = require('del');
 var webpack = require('gulp-webpack');
+var merge = require('gulp-merge-json');
 var crx = require('gulp-crx-pack');
 var fs = require('fs');
 
@@ -23,6 +24,16 @@ gulp.task('cleanup', function () {
     return del([
         'package/dist/**/*'
     ]);
+});
+
+gulp.task('updateVersion', function () {
+    return gulp.src('package/manifest.json')
+        .pipe(merge({
+            fileName: 'manifest.json',
+            endObj: { version: manifest.version },
+            jsonSpace: '    '
+        }))
+        .pipe(gulp.dest('package'));
 });
 
 gulp.task('webpack', function() {
@@ -57,7 +68,7 @@ gulp.task('watch', function () {
     gulp.watch('src/**/*.html', ['copy']);
 });
 
-gulp.task('build', gulpSequence('cleanup', ['copy', 'webpack']));
+gulp.task('build', gulpSequence(['cleanup', 'updateVersion'], ['copy', 'webpack']));
 gulp.task('development', gulpSequence('set-development', 'build', 'watch'));
 gulp.task('production', gulpSequence('set-production', 'build'));
 gulp.task('publish', gulpSequence('production', 'package'));
