@@ -5,8 +5,7 @@ var gulpSequence = require('gulp-sequence');
 var del = require('del');
 var webpack = require('gulp-webpack');
 var merge = require('gulp-merge-json');
-var crx = require('gulp-crx-pack');
-var fs = require('fs');
+var zip = require('gulp-zip');
 
 function isProduction () {
     return process.env.NODE_ENV === 'production';
@@ -55,11 +54,8 @@ gulp.task('copy', function() {
 });
 
 gulp.task('package', function() {
-    return gulp.src('package')
-        .pipe(crx({
-            privateKey: fs.readFileSync('package.pem', 'utf8'),
-            filename: `${manifest.name}-${manifest.version}.crx`
-        }))
+    return gulp.src('./package/**/*')
+        .pipe(zip(`${manifest.name}-${manifest.version}.zip`))
         .pipe(gulp.dest('./releases'));
 });
 

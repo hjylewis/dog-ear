@@ -1,6 +1,6 @@
 {
   "name": "dog-ear",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A chrome extension to temporarily bookmark tabs to declutter your browser",
   "main": "manifest.json",
   "scripts": {
@@ -33,10 +33,10 @@
     "eslint-plugin-react": "^6.8.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "gulp": "^3.9.1",
-    "gulp-crx-pack": "^1.0.1",
     "gulp-merge-json": "^1.0.0",
     "gulp-sequence": "^0.4.6",
     "gulp-webpack": "^1.5.0",
+    "gulp-zip": "^4.0.0",
     "mocha": "^3.2.0",
     "node-sass": "^4.1.1",
     "sass-loader": "^4.1.1",
