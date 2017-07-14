@@ -1,6 +1,6 @@
 {
   "name": "dog-ear",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A chrome extension to temporarily bookmark tabs to declutter your browser",
   "main": "manifest.json",
   "scripts": {
