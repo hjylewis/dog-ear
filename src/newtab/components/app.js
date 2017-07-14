@@ -99,15 +99,20 @@ class App extends React.Component {
         });
     }
 
-    setErrorMessage (message) {
+    setErrorMessage (error) {
+        let message;
         // If Error object
-        if (message && message.message) {
-            message = message.message;
+        if (error && error.message) {
+            message = error.message;
+        } else {
+            message = error;
         }
 
         this.setState({
             errorMessage: message
         });
+
+        if (error) throw error;
     }
 
     render () {

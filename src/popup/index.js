@@ -16,14 +16,18 @@ chrome.browserAction.onClicked.addListener((tab) => {
     chrome.tabs.query({windowId: chrome.windows.WINDOW_ID_CURRENT }, (tabs) => {
         var tabNum = tabs.length;
 
+        let addAndRemoveTab = () => {
+            toStore.add().then(() => {
+                chrome.tabs.remove(tab.id);
+            }).catch(displayErrorNotification);
+        };
+
         // If we are removing the last tab
         if (tabNum === 1) {
-            chrome.tabs.create({ url:  NEWTAB_URL});
+            chrome.tabs.create({ url:  NEWTAB_URL}, addAndRemoveTab);
+        } else {
+            addAndRemoveTab();
         }
-
-        toStore.add().then(() => {
-            chrome.tabs.remove(tab.id);
-        }).catch(displayErrorNotification);
     });
 
 
@@ -39,18 +43,18 @@ chrome.contextMenus.create({
 chrome.contextMenus.onClicked.addListener((info, tab) => {
     if (info.menuItemId === 'all_tabs') {
         chrome.tabs.query({windowId: tab.windowId}, (tabs) => {
-            chrome.tabs.create({ url:  NEWTAB_URL});
+            chrome.tabs.create({ url:  NEWTAB_URL}, () => {
+                tabs.forEach((tab) => {
+                    var toStore = Tab.create({
+                        url: tab.url,
+                        title: tab.title,
+                        favicon: tab.favIconUrl
+                    });
 
-            tabs.forEach((tab) => {
-                var toStore = Tab.create({
-                    url: tab.url,
-                    title: tab.title,
-                    favicon: tab.favIconUrl
+                    toStore.add().then(() => {
+                        chrome.tabs.remove(tab.id);
+                    }).catch(displayErrorNotification);
                 });
-
-                toStore.add().then(() => {
-                    chrome.tabs.remove(tab.id);
-                }).catch(displayErrorNotification);
             });
         });
     }

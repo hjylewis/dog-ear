@@ -16,7 +16,7 @@ class Storage {
             // Check for orphans
             Promise.all([
                 this.size({ excludeReserved: true }),
-                this._getTabIDs()
+                this._getTabIDsWithProtection()
             ]).then((res) => {
                 var size = res[0];
                 var tabIDs = res[1];
@@ -47,18 +47,29 @@ class Storage {
     }
 
     getRecentTabs (num = DEFAULT_RECENT_NUM) {
-        return this._getTabIDs().then(tabIDs => {
+        return this._getTabIDsWithProtection().then(tabIDs => {
             var recent = tabIDs.slice(-1 * num);
             return Connection.get(recent).then(items => {
-                return recent.reverse().map((url) => {
-                    return Tab.create(items[url]);
+                let tabs = [];
+                let cleanUps = [];
+
+                recent.reverse().forEach((url) => {
+                    // Check if tab exists in storage
+                    let tabConfig = items[url];
+                    if (tabConfig) {
+                        tabs.push(Tab.create(tabConfig));
+                    } else {
+                        cleanUps.push(this._removeFromTabIDs(url));
+                    }
                 });
+
+                return Promise.all(cleanUps).then(() => tabs);
             });
         });
     }
 
     getOldestTabs (num = DEFAULT_RECENT_NUM) {
-        return this._getTabIDs().then(tabIDs => {
+        return this._getTabIDsWithProtection().then(tabIDs => {
             var oldest = tabIDs.slice(0, num);
             return Connection.get(oldest).then(items => {
                 return oldest.map((url) => {
@@ -79,17 +90,17 @@ class Storage {
         return this.lock.acquire('ADDED', () => {
             // Check if more space
             return this.getSizeAndClearUpSpace(10).then(() => {
-                return this.getTab(tab.url).then((oldTab) => {
-                    if (oldTab) {
-                        return this.removeTab(oldTab);
-                    } else {
-                        return Promise.resolve();
-                    }
-                }).then(() => {
-                    return Connection.set(tab.url, tab);
-                }).then(() => {
-                    return this._addToTabIDs(tab.url);
-                });
+                return this.getTab(tab.url);
+            }).then((oldTab) => {
+                if (oldTab) {
+                    return this.removeTab(oldTab);
+                } else {
+                    return Promise.resolve();
+                }
+            }).then(() => {
+                return Connection.set(tab.url, tab);
+            }).then(() => {
+                return this._addToTabIDs(tab.url);
             });
         });
     }
@@ -110,7 +121,7 @@ class Storage {
 
     cleanUpOrphans () {
         return Promise.all([
-            this._getTabIDs(),
+            this._getTabIDsWithProtection(),
             Connection.get(null)
         ]).then((res) => {
             var tabIDs = res[0];
@@ -150,6 +161,9 @@ class Storage {
         });
     }
 
+    // Don't try to lock this function because other functions (_addToTabIDs, _removeFromTabIDs)
+    // Already lock before calling this.
+    // Instead use _getTabIDsWithProtection if a lock is needed for reading.
     _getTabIDs () {
         return Connection.get(TAB_ARRAY_KEY).then((items) => {
             // If no tab array exists
@@ -159,6 +173,12 @@ class Storage {
             } else {
                 return items[TAB_ARRAY_KEY];
             }
+        });
+    }
+
+    _getTabIDsWithProtection () {
+        return this.lock.acquire(TAB_ARRAY_KEY, () => {
+            return this._getTabIDs();
         });
     }
 
