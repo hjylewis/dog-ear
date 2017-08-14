@@ -1,6 +1,8 @@
 import React from 'react';
 import Storage from '../../services/storage/index';
 import TimeGrouping from '../../services/timeGrouping';
+import CategoryGrouping from '../../services/categoryGrouping';
+
 
 import { ErrorAlert } from './alert';
 import List from './list';
@@ -20,7 +22,7 @@ class App extends React.Component {
         this.state = {
             tabs: null,
             errorMessage: null,
-            groups: [],
+            groupingMode: 'ADDED', // ADDED or CATEGORY
             selection: {}
         };
 
@@ -29,6 +31,7 @@ class App extends React.Component {
         this.openTabs = this.openTabs.bind(this);
         this.select = this.select.bind(this);
         this.setErrorMessage = this.setErrorMessage.bind(this);
+        this.changeGroupingMode = this.changeGroupingMode.bind(this);
     }
 
     componentDidMount () {
@@ -41,8 +44,7 @@ class App extends React.Component {
     loadTabs () {
         Storage.getRecentTabs(this.tabNumber).then((tabs) => {
             this.setState({
-                tabs: tabs,
-                groups: TimeGrouping.createGrouping(tabs)
+                tabs: tabs
             });
         }).catch((error) => this.setErrorMessage(error));
     }
@@ -115,7 +117,25 @@ class App extends React.Component {
         if (error) throw error;
     }
 
+    changeGroupingMode () {
+        // Toggle
+        if (this.state.groupingMode === 'ADDED') {
+            this.setState({groupingMode: 'CATEGORY'});
+        } else {
+            this.setState({groupingMode: 'ADDED'});
+        }
+    }
+
     render () {
+        let groups = [];
+        if (this.state.tabs) {
+            if (this.state.groupingMode === 'ADDED') {
+                groups = TimeGrouping.createGrouping(this.state.tabs);
+            } else {
+                groups = CategoryGrouping.createGrouping(this.state.tabs);
+            }
+        }
+
         return (
             <div className="app" onScroll={this.onScroll}>
                 <div className="header">
@@ -123,6 +143,7 @@ class App extends React.Component {
                     <div className="header-content">
                         <DogLogo className="dog-logo"/>
                         <h1>Your Dog Ears</h1>
+                        <button onClick={this.changeGroupingMode}>grouping</button>
                     </div>
                 </div>
                 <div className="app-content">
@@ -132,7 +153,7 @@ class App extends React.Component {
                         setErrorMessage={this.setErrorMessage}
                     />
                     <List
-                        groups={this.state.groups}
+                        groups={groups}
                         openTabs={this.openTabs}
 
                         select={this.select}

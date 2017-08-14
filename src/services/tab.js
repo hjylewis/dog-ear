@@ -2,12 +2,12 @@ import Storage from './storage/index';
 import Error from './error';
 
 class Tab {
-    constructor (config) {
-        var {url, favicon, added, title} = config;
+    constructor ({url, favicon, added, title, category}) {
         this.title = title;
         this.url = url;
         this.favicon = favicon;
         this.added = added;
+        this.category = category;
     }
 
     static create (config) {
