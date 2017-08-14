@@ -20,10 +20,16 @@ class Guide extends React.Component {
         this.tabMap = {}; // Maps url to chrome tab id
 
         this.saveTabs = this.saveTabs.bind(this);
+        this.getOpenTabs = this.getOpenTabs.bind(this);
     }
 
     componentDidMount () {
         this.getOpenTabs();
+        chrome.tabs.onUpdated.addListener(this.getOpenTabs);
+        chrome.tabs.onRemoved.addListener(this.getOpenTabs);
+        chrome.tabs.onDetached.addListener(this.getOpenTabs);
+        chrome.tabs.onAttached.addListener(this.getOpenTabs);
+        chrome.tabs.onReplaced.addListener(this.getOpenTabs);
     }
 
     getOpenTabs () {
