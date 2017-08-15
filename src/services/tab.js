@@ -8,6 +8,11 @@ class Tab {
         this.favicon = favicon;
         this.added = added;
         this.category = category;
+
+        // Make url (the id) readonly
+        Object.defineProperty(this, 'url', {
+            writable: false
+        });
     }
 
     static create (config) {
@@ -34,6 +39,10 @@ class Tab {
 
     add () {
         return Storage.addTab(this);
+    }
+
+    update () {
+        return Storage.updateTab(this);
     }
 
     remove () {

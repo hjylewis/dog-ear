@@ -105,6 +105,10 @@ class Storage {
         });
     }
 
+    updateTab (tab) {
+        return Connection.set(tab.url, tab);
+    }
+
     removeTab (tab) {
         if (!tab.url) {
             return Promise.reject(Error.TAB_NO_ID());

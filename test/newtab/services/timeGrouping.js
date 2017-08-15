@@ -5,7 +5,7 @@ var now = Date.now();
 
 describe('TimeGroupingService', function() {
     describe('#createGrouping()', function() {
-        it('should return corrent groupings of tabs', function() {
+        it('should return current groupings of tabs', function() {
             var tabs = [];
             tabs.push({
                 added: now
@@ -27,15 +27,14 @@ describe('TimeGroupingService', function() {
             var groupings = timeGrouping.createGrouping(tabs);
 
             assert.isArray(groupings, 'should be an array');
-            assert.lengthOf(groupings, 5);
+            assert.lengthOf(groupings, 4);
             assert.equal(groupings[0].group, 'just now');
-            assert.equal(groupings[1].group, '10 seconds ago');
-            assert.equal(groupings[2].group, '5 minutes ago');
-            assert.equal(groupings[3].group, '8 hours ago');
-            assert.equal(groupings[4].group, '3 days ago');
+            assert.equal(groupings[1].group, '5 minutes ago');
+            assert.equal(groupings[2].group, '8 hours ago');
+            assert.equal(groupings[3].group, '3 days ago');
         });
 
-        it('should return corrent number in groupings', function() {
+        it('should return current number in groupings', function() {
             var tabs = [];
             tabs.push({
                 added: now
