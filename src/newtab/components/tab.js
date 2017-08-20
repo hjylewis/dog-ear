@@ -40,12 +40,29 @@ Icon.propTypes = {
 };
 
 class Tab extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.onDragStart = this.onDragStart.bind(this);
+    }
+
+    onDragStart (event) {
+        event.dataTransfer.effectAllowed = 'move';
+        event.dataTransfer.setData('application/tab', JSON.stringify(this.props.data));
+        event.dataTransfer.setData('text/uri-list', this.props.data.url);
+        event.dataTransfer.setData('text/plain', this.props.data.title);
+    }
+
     render () {
         return (
-            <div className={classNames({
-                'tab': true,
-                'no-highlight': !this.props.openTab
-            })} >
+            <div
+                draggable="true"
+                onDragStart={this.onDragStart}
+                className={classNames({
+                    'tab': true,
+                    'no-highlight': !this.props.openTab
+                })
+            } >
                 <Icon
                     favicon={this.props.data.favicon}
                     selected={this.props.selected}

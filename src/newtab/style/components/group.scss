@@ -1,0 +1,20 @@
+.group--dragover {
+    border: 3px dashed $text-color;
+    padding: 10px;
+}
+
+.group__header {
+    h3 {
+        display: inline-block;
+    }
+
+    .select-all {
+        display: none;
+    }
+
+    &:hover {
+        .select-all {
+            display: initial;
+        }
+    }
+}

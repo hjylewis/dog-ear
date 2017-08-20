@@ -2,22 +2,6 @@
     width: 100%;
 }
 
-.group-header {
-    h3 {
-        display: inline-block;
-    }
-
-    .select-all {
-        display: none;
-    }
-
-    &:hover {
-        .select-all {
-            display: initial;
-        }
-    }
-}
-
 .select-all {
     margin: 7px;
 

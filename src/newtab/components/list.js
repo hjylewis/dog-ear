@@ -2,56 +2,13 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Tab from './tab';
-
-class GroupHeaders extends React.Component {
-    constructor (props) {
-        super(props);
-
-        this.allSelected = false;
-
-        this.selectAll = this.selectAll.bind(this);
-    }
-    selectAll () {
-        this.props.data.tabs.forEach((tab) => {
-            this.props.select(tab, !this.allSelected);
-        });
-    }
-
-    render () {
-        this.allSelected = this.props.data.tabs.reduce((a, b) => {
-            return a && (b.url in this.props.selection);
-        }, true);
-
-        return (
-            <div className='group-header'>
-                <h3>{this.props.data.group}</h3>
-                <span className='select-all' onClick={this.selectAll}>
-                    {this.allSelected ? 'un' : ''}select all
-                </span>
-            </div>
-        );
-    }
-}
-
-GroupHeaders.propTypes = {
-    data: React.PropTypes.object.isRequired, // group data
-    select: React.PropTypes.func, // Function that selects or unselects tab
-    selection: React.PropTypes.object.isRequired // Selected tabs
-};
+import Group from './group';
 
 class List extends React.Component {
     render () {
-        var tabs = [];
+        var groups = [];
         this.props.groups.forEach((group) => {
-            tabs.push(
-                <GroupHeaders
-                    key={group.group}
-                    data={group}
-                    select={this.props.select}
-                    selection={this.props.selection}
-                />
-            );
-
+            let tabs = [];
             group.tabs.forEach((tab) => {
                 tabs.push(
                     <Tab
@@ -63,11 +20,22 @@ class List extends React.Component {
                     />
                 );
             });
+
+            groups.push(
+                <Group
+                    key={group.group}
+                    data={group}
+                    select={this.props.select}
+                    selection={this.props.selection}
+                >
+                    {tabs}
+                </Group>
+            );
         });
 
         return (
             <div className={classNames('list')}>
-                {tabs}
+                {groups}
             </div>
         );
     }
