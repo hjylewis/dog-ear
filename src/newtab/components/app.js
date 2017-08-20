@@ -154,6 +154,7 @@ class App extends React.Component {
                     />
                     <List
                         groups={groups}
+                        customizable={this.state.groupingMode === 'CATEGORY'}
                         openTabs={this.openTabs}
 
                         select={this.select}

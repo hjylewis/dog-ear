@@ -14,6 +14,7 @@ class List extends React.Component {
                     <Tab
                         key={tab.url}
                         data={tab}
+                        draggable={this.props.customizable}
                         selected={tab.url in this.props.selection}
                         openTab={this.props.openTabs ? this.props.openTabs.bind(null, tab) : null}
                         select={this.props.select.bind(null, tab)}
@@ -25,6 +26,7 @@ class List extends React.Component {
                 <Group
                     key={group.group}
                     data={group}
+                    customizable={this.props.customizable}
                     select={this.props.select}
                     selection={this.props.selection}
                 >
@@ -43,6 +45,7 @@ class List extends React.Component {
 
 List.propTypes = {
     groups: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // Array of groups
+    customizable: React.PropTypes.bool,
     openTabs: React.PropTypes.func, // Function that opens tab
 
     select: React.PropTypes.func.isRequired, // Function that selects or unselects tab

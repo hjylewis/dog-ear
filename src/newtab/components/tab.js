@@ -56,7 +56,7 @@ class Tab extends React.Component {
     render () {
         return (
             <div
-                draggable="true"
+                draggable={this.props.draggable}
                 onDragStart={this.onDragStart}
                 className={classNames({
                     'tab': true,
@@ -83,6 +83,7 @@ class Tab extends React.Component {
 
 Tab.propTypes = {
     data: React.PropTypes.object.isRequired,
+    draggable: React.PropTypes.bool,
     openTab: React.PropTypes.func,
     selected: React.PropTypes.bool.isRequired,
     select: React.PropTypes.func.isRequired
