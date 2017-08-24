@@ -98,6 +98,16 @@ class GroupHeaders extends React.Component {
             return a && (b.url in this.props.selection);
         }, true);
 
+        let groupName = this.props.data.group !== null
+            ? (<span className='group-name__text'>
+                {this.props.data.group}
+            </span>) :
+            (<div className='group-name__text group-name__text--no-category'>
+                <span className='group-name__text__maintext'>No Category</span>
+                <span className='group-name__text__subtext'> — Drag to organize into categories</span>
+            </div>);
+
+
         return (
             <div className='group__header'>
                 <div
@@ -120,9 +130,7 @@ class GroupHeaders extends React.Component {
                             onBlur={this.saveAndClose}
                             onFocus={this.placeCursorAtEnd}
                         /> :
-                        <span>
-                            {this.props.data.group}
-                        </span>
+                        groupName
                     }
                 </div>
                 <span className='select-all' onClick={this.selectAll}>
@@ -205,7 +213,7 @@ class Group extends React.Component {
                 onDrop={this.onDrop}
             >
                 <GroupHeaders
-                    editable={this.props.customizable}
+                    editable={this.props.customizable && this.props.data.group !== null}
                     data={this.props.data}
                     select={this.props.select}
                     selection={this.props.selection}

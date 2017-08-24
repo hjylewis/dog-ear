@@ -5,6 +5,6 @@
 .guide-info {
     padding: 40px 0 20px;
     font-style: italic;
-    color: lighten($text-color, 30%);
+    color: $info-text-color;
     line-height: 2;
 }

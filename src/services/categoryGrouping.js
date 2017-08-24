@@ -1,9 +1,14 @@
 let CategoryGrouping = {
     createGrouping: (tabs) => {
         let groups = {};
+        let groupless = [];
 
         for (let tab of tabs) {
-            let category = tab.category || null;
+            let category = tab.category;
+            if (!category) {
+                groupless.push(tab);
+                continue;
+            }
 
             if (!(category in groups)) {
                 groups[category] = [];
@@ -12,20 +17,22 @@ let CategoryGrouping = {
         }
 
         let ordering = Object.keys(groups).sort();
-        let idxOfNull = ordering.indexOf(null);
 
-        // Move null to the front
-        if (idxOfNull > -1) {
-            ordering.splice(idxOfNull, 1);
-            ordering.unshift(null);
-        }
-
-        return ordering.map((category) => {
+        let grouping = ordering.map((category) => {
             return {
                 group: category,
                 tabs: groups[category]
             };
         });
+
+        if (groupless.length > 0) {
+            grouping.unshift({
+                group: null,
+                tabs: groupless
+            });
+        }
+
+        return grouping;
     }
 };
 

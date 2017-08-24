@@ -24,7 +24,7 @@ class List extends React.Component {
 
             groups.push(
                 <Group
-                    key={group.group}
+                    key={group.group ? `${group.group}-key` : 'groupless'}
                     data={group}
                     customizable={this.props.customizable}
                     select={this.props.select}

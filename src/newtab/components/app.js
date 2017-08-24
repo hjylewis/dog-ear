@@ -133,6 +133,7 @@ class App extends React.Component {
                 groups = TimeGrouping.createGrouping(this.state.tabs);
             } else {
                 groups = CategoryGrouping.createGrouping(this.state.tabs);
+                console.log(groups);
             }
         }
 

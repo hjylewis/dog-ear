@@ -45,8 +45,8 @@
         border-color: $text-color;
     }
 
-    span, .group-name__input {
-        font-size: 1.17em;
+    .group-name__text, .group-name__input {
+        font-size: 1.17rem;
         font-weight: bold;
     }
 
@@ -55,5 +55,22 @@
         background-color: initial;
         border-width: 0;
         outline: none; /* bad a11y? */
+    }
+}
+
+.group-name__text {
+    &.group-name__text--no-category {
+        color: $info-text-color;
+
+        .group-name__text__maintext {
+            font-size: 1rem;
+        }
+
+        .group-name__text__subtext {
+            font-weight: normal;
+            font-style: italic;
+            line-height: 2;
+            font-size: .9rem;
+        }
     }
 }
