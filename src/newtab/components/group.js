@@ -22,6 +22,7 @@ class GroupHeaders extends React.Component {
         this.changeName = this.changeName.bind(this);
         this.saveAndClose = this.saveAndClose.bind(this);
         this.resetAndClose = this.resetAndClose.bind(this);
+        this.placeCursorAtEnd = this.placeCursorAtEnd.bind(this);
     }
 
     selectAll () {
@@ -87,6 +88,11 @@ class GroupHeaders extends React.Component {
         });
     }
 
+    placeCursorAtEnd (event) {
+        let end = this.state.name.length;
+        event.target.setSelectionRange(end, end);
+    }
+
     render () {
         this.allSelected = this.props.data.tabs.reduce((a, b) => {
             return a && (b.url in this.props.selection);
@@ -112,6 +118,7 @@ class GroupHeaders extends React.Component {
                             onChange={this.changeName}
                             onKeyUp={this.onKeyUp}
                             onBlur={this.saveAndClose}
+                            onFocus={this.placeCursorAtEnd}
                         /> :
                         <span>
                             {this.props.data.group}
