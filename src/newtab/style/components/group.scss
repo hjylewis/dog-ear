@@ -1,13 +1,14 @@
-.group--dragover {
+.group {
+    padding: 4px;
+    border: 3px solid transparent;
+}
+
+.group.group--dragover {
     border: 3px dashed $text-color;
-    padding: 10px;
+    padding: 4px;
 }
 
 .group__header {
-    h3 {
-        display: inline-block;
-    }
-
     .select-all {
         display: none;
     }
@@ -19,6 +20,40 @@
     }
 }
 
-.group-name--editable {
-    cursor: pointer;
+.group-name {
+    display: inline-block;
+    margin: 10px 0;
+
+    &.group-name--editable {
+        cursor: pointer;
+        min-width: 0;
+        transition: min-width .3s;
+
+        border-style: solid;
+        border-width: 0 0 2px;
+        border-color: transparent;
+        margin-bottom: 8px;
+    }
+
+    &.group-name--expanded {
+        min-width: 200px;
+    }
+
+
+    &.group-name--editmode,
+    &.group-name--editable:hover {
+        border-color: $text-color;
+    }
+
+    span, .group-name__input {
+        font-size: 1.17em;
+        font-weight: bold;
+    }
+
+    .group-name__input {
+        padding: 0;
+        background-color: initial;
+        border-width: 0;
+        outline: none; /* bad a11y? */
+    }
 }

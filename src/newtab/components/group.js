@@ -9,6 +9,7 @@ class GroupHeaders extends React.Component {
 
         this.state = {
             editMode: false,
+            expanded: false,
             name: this.props.data.group
         };
 
@@ -16,6 +17,7 @@ class GroupHeaders extends React.Component {
 
         this.selectAll = this.selectAll.bind(this);
         this.editGroupName = this.editGroupName.bind(this);
+        this.onExpandTransition = this.onExpandTransition.bind(this);
         this.onKeyUp = this.onKeyUp.bind(this);
         this.changeName = this.changeName.bind(this);
         this.saveAndClose = this.saveAndClose.bind(this);
@@ -30,6 +32,14 @@ class GroupHeaders extends React.Component {
 
     editGroupName () {
         if (this.props.editable) {
+            this.setState({expanded : true});
+        }
+    }
+
+    onExpandTransition (event) {
+        if (event.propertyName !== 'min-width') return;
+
+        if (this.state.expanded) {
             this.setState({editMode : true});
         }
     }
@@ -52,6 +62,7 @@ class GroupHeaders extends React.Component {
     resetAndClose () {
         this.setState({
             name: this.props.data.group,
+            expanded: false,
             editMode: false
         });
     }
@@ -62,12 +73,17 @@ class GroupHeaders extends React.Component {
             return;
         }
 
+        if (this.state.name === this.props.data.group) {
+            this.setState({
+                expanded: false,
+                editMode: false
+            });
+            return;
+        }
+
         this.props.data.tabs.forEach((tab) => {
             tab.category = this.state.name;
             tab.update();
-        });
-        this.setState({
-            editMode: false
         });
     }
 
@@ -78,22 +94,30 @@ class GroupHeaders extends React.Component {
 
         return (
             <div className='group__header'>
-                {this.state.editMode ?
-                    <input
-                        autoFocus
-                        placeholder='Your category name'
-                        value={this.state.name}
-                        onChange={this.changeName}
-                        onKeyUp={this.onKeyUp}
-                        onBlur={this.saveAndClose}
-                    /> :
-                    <h3
-                        className={classNames('group-name', {'group-name--editable': this.props.editable})}
-                        onClick={this.editGroupName}
-                    >
-                        {this.props.data.group}
-                    </h3>
-                }
+                <div
+                    className={classNames('group-name', {
+                        'group-name--editable': this.props.editable,
+                        'group-name--expanded': this.state.expanded,
+                        'group-name--editmode':this.state.editMode
+                    })}
+                    onClick={this.editGroupName}
+                    onTransitionEnd={this.onExpandTransition}
+                >
+                    {this.state.editMode ?
+                        <input
+                            className='group-name__input'
+                            autoFocus
+                            placeholder='Your category name'
+                            value={this.state.name}
+                            onChange={this.changeName}
+                            onKeyUp={this.onKeyUp}
+                            onBlur={this.saveAndClose}
+                        /> :
+                        <span>
+                            {this.props.data.group}
+                        </span>
+                    }
+                </div>
                 <span className='select-all' onClick={this.selectAll}>
                     {this.allSelected ? 'un' : ''}select all
                 </span>
