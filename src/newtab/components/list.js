@@ -4,6 +4,12 @@ import classNames from 'classnames';
 import Tab from './tab';
 import Group from './group';
 
+const NewGroup = () => (
+    <div>
+        Add to New Group +
+    </div>
+);
+
 class List extends React.Component {
     render () {
         var groups = [];
