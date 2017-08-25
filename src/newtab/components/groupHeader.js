@@ -145,3 +145,5 @@ GroupHeader.propTypes = {
     select: React.PropTypes.func, // Function that selects or unselects tab
     selection: React.PropTypes.object.isRequired // Selected tabs
 };
+
+export default GroupHeader;

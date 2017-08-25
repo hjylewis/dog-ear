@@ -11,6 +11,38 @@ const NewGroup = () => (
 );
 
 class List extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            dragOverCount: 0
+        };
+
+        this.onDragEnter = this.onDragEnter.bind(this);
+        this.onDragLeave = this.onDragLeave.bind(this);
+        this.onDrop = this.onDrop.bind(this);
+    }
+
+    onDragEnter (event) {
+        if (!event.dataTransfer.types.includes('application/tab') || !this.props.customizable) {
+            return;
+        }
+
+        this.setState({dragOverCount : this.state.dragOverCount + 1});
+    }
+
+    onDragLeave (event) {
+        if (!event.dataTransfer.types.includes('application/tab') || !this.props.customizable) {
+            return;
+        }
+
+        this.setState({dragOverCount : this.state.dragOverCount - 1});
+    }
+
+    onDrop () {
+        this.setState({dragOverCount : 0});
+    }
+
     render () {
         var groups = [];
         this.props.groups.forEach((group) => {
@@ -42,7 +74,13 @@ class List extends React.Component {
         });
 
         return (
-            <div className={classNames('list')}>
+            <div
+                className={classNames('list')}
+                onDragEnter={this.onDragEnter}
+                onDragLeave={this.onDragLeave}
+                onDrop={this.onDrop}
+            >
+                {this.state.dragOverCount > 0 ? <NewGroup/> : ''}
                 {groups}
             </div>
         );
