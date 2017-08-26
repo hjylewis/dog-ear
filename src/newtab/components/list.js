@@ -2,13 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 
 import Tab from './tab';
-import Group from './group';
-
-const NewGroup = () => (
-    <div>
-        Add to New Group +
-    </div>
-);
+import { Group, GroupWithDragAndDrop } from './group';
+import NewGroup from './newGroup';
 
 class List extends React.Component {
     constructor (props) {
@@ -44,6 +39,8 @@ class List extends React.Component {
     }
 
     render () {
+        const GroupComponent = this.props.customizable ? GroupWithDragAndDrop : Group;
+
         var groups = [];
         this.props.groups.forEach((group) => {
             let tabs = [];
@@ -61,15 +58,14 @@ class List extends React.Component {
             });
 
             groups.push(
-                <Group
+                <GroupComponent
                     key={group.group ? `${group.group}-key` : 'groupless'}
                     data={group}
-                    customizable={this.props.customizable}
                     select={this.props.select}
                     selection={this.props.selection}
                 >
                     {tabs}
-                </Group>
+                </GroupComponent>
             );
         });
 

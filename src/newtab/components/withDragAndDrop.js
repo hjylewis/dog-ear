@@ -2,7 +2,7 @@ import React from 'react';
 
 import Tab from '../../services/tab';
 
-function withDragAndDrop(WrappedComponent, onDrop) {
+function withDragAndDrop(WrappedComponent, onDrop, extraProps = {}) {
     class withDragAndDrop extends React.Component {
         constructor (props) {
             super(props);
@@ -18,13 +18,13 @@ function withDragAndDrop(WrappedComponent, onDrop) {
         }
 
         onDragOver (event) {
-            if (event.dataTransfer.types.includes('application/tab') && this.props.customizable) {
+            if (event.dataTransfer.types.includes('application/tab')) {
                 event.preventDefault();
             }
         }
 
         onDragEnter (event) {
-            if (!event.dataTransfer.types.includes('application/tab') || !this.props.customizable) {
+            if (!event.dataTransfer.types.includes('application/tab')) {
                 return;
             }
 
@@ -35,7 +35,7 @@ function withDragAndDrop(WrappedComponent, onDrop) {
         }
 
         onDragLeave (event) {
-            if (!event.dataTransfer.types.includes('application/tab') || !this.props.customizable) {
+            if (!event.dataTransfer.types.includes('application/tab')) {
                 return;
             }
 
@@ -53,6 +53,8 @@ function withDragAndDrop(WrappedComponent, onDrop) {
         }
 
         render () {
+            let passProps = Object.assign(extraProps, this.props);
+
             return (
                 <div
                     onDragEnter={this.onDragEnter}
@@ -60,15 +62,11 @@ function withDragAndDrop(WrappedComponent, onDrop) {
                     onDragOver={this.onDragOver}
                     onDrop={this.onDrop}
                 >
-                    <WrappedComponent dragOver={this.state.dragOverCount > 0}  {...this.props}/>
+                    <WrappedComponent dragOver={this.state.dragOverCount > 0}  {...passProps}/>
                 </div>
             );
         }
     }
-
-    withDragAndDrop.propTypes = {
-        customizable: React.PropTypes.bool
-    };
 
     return withDragAndDrop;
 }

@@ -34,9 +34,15 @@ Group.propTypes = {
     selection: React.PropTypes.object.isRequired // Selected tabs
 };
 
-export default withDragAndDrop(Group, function (tab) {
-    if (this.props.data.group !== tab.category) {
-        tab.category = this.props.data.group;
-        tab.update();
-    }
-});
+const GroupWithDragAndDrop = withDragAndDrop(
+    Group,
+    function (tab) {
+        if (this.props.data.group !== tab.category) {
+            tab.category = this.props.data.group;
+            tab.update();
+        }
+    },
+    { customizable: true }
+);
+
+export { Group, GroupWithDragAndDrop };
