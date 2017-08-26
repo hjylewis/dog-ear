@@ -2,7 +2,7 @@ import React from 'react';
 
 import Tab from '../../services/tab';
 
-function withDragAndDrop(WrappedComponent, onDrop, extraProps = {}) {
+function withDragAndDrop(WrappedComponent, extraProps = {}) {
     class withDragAndDrop extends React.Component {
         constructor (props) {
             super(props);
@@ -47,7 +47,7 @@ function withDragAndDrop(WrappedComponent, onDrop, extraProps = {}) {
             let tabConfig = JSON.parse(event.dataTransfer.getData('application/tab'));
             let tab = Tab.create(tabConfig);
 
-            onDrop.call(this, tab);
+            this.props.onDrop(tab);
 
             event.preventDefault();
         }
@@ -67,6 +67,10 @@ function withDragAndDrop(WrappedComponent, onDrop, extraProps = {}) {
             );
         }
     }
+
+    withDragAndDrop.propTypes = {
+        onDrop: React.PropTypes.func.isRequired
+    };
 
     return withDragAndDrop;
 }

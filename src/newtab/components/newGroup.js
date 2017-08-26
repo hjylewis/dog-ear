@@ -17,4 +17,4 @@ NewGroup.propTypes = {
     dragOver: React.PropTypes.bool, // If is being dragged over
 };
 
-export default withDragAndDrop(NewGroup, (tab) => { console.log(tab);});
+export default withDragAndDrop(NewGroup);

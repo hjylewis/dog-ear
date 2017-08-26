@@ -6,8 +6,8 @@ class GroupHeader extends React.Component {
         super(props);
 
         this.state = {
-            editMode: false,
-            expanded: false,
+            editMode: !!this.props.forceEditMode,
+            expanded: !!this.props.forceEditMode,
             name: this.props.data.group
         };
 
@@ -21,6 +21,12 @@ class GroupHeader extends React.Component {
         this.saveAndClose = this.saveAndClose.bind(this);
         this.resetAndClose = this.resetAndClose.bind(this);
         this.placeCursorAtEnd = this.placeCursorAtEnd.bind(this);
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+        if (this.state.editMode && !nextState.editMode) {
+            if (this.props.onEditModeOff) this.props.onEditModeOff();
+        }
     }
 
     selectAll () {
@@ -72,17 +78,16 @@ class GroupHeader extends React.Component {
             return;
         }
 
-        if (this.state.name === this.props.data.group) {
-            this.setState({
-                expanded: false,
-                editMode: false
+        if (this.state.name !== this.props.data.group) {
+            this.props.data.tabs.forEach((tab) => {
+                tab.category = this.state.name;
+                tab.update();
             });
-            return;
         }
 
-        this.props.data.tabs.forEach((tab) => {
-            tab.category = this.state.name;
-            tab.update();
+        this.setState({
+            expanded: false,
+            editMode: false
         });
     }
 
@@ -101,7 +106,7 @@ class GroupHeader extends React.Component {
                 {this.props.data.group}
             </span>) :
             (<div className='group-name__text group-name__text--no-category'>
-                <span className='group-name__text__maintext'>No Category</span>
+                <span className='group-name__text__maintext'>Uncategorized</span>
                 <span className='group-name__text__subtext'> — Drag to organize into categories</span>
             </div>);
 
@@ -141,9 +146,11 @@ class GroupHeader extends React.Component {
 
 GroupHeader.propTypes = {
     data: React.PropTypes.object.isRequired, // group data
+    forceEditMode: React.PropTypes.bool,
     editable: React.PropTypes.bool,
     select: React.PropTypes.func, // Function that selects or unselects tab
-    selection: React.PropTypes.object.isRequired // Selected tabs
+    selection: React.PropTypes.object.isRequired, // Selected tabs
+    onEditModeOff: React.PropTypes.func
 };
 
 export default GroupHeader;
