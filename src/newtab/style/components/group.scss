@@ -1,11 +1,5 @@
 .group {
     padding: 4px;
-    border: 3px solid transparent;
-}
-
-.group.group--dragover {
-    border: 3px dashed $text-color;
-    padding: 4px;
 }
 
 .group__header {

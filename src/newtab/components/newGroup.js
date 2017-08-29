@@ -3,15 +3,32 @@ import classNames from 'classnames';
 
 import withDragAndDrop from './withDragAndDrop';
 
-const NewGroup = ({dragOver}) => (
-    <div
-        className={classNames('group', {
-            'group--dragover': dragOver
-        })}
-    >
-        Add to New Group + {dragOver}
-    </div>
-);
+class NewGroup extends React.Component {
+    constructor (props) {
+        super(props);
+
+        this.state = {
+            expanded: false
+        };
+    }
+
+    componentDidMount () {
+        setTimeout(() => this.setState({ expanded: true }), 0);
+    }
+
+    render () {
+        return (
+            <div
+                className={classNames('new-group-target', 'target', {
+                    'new-group-target--expand': this.state.expanded,
+                    'target--dragover': this.props.dragOver
+                })}
+            >
+                Drop Here to Create a New Group
+            </div>
+        );
+    }
+}
 
 NewGroup.propTypes = {
     dragOver: React.PropTypes.bool, // If is being dragged over

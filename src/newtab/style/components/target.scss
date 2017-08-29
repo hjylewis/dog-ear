@@ -1,0 +1,8 @@
+
+.target {
+    border: 3px solid transparent;
+
+    &.target--dragover {
+        border: 3px dashed $text-color;
+    }
+}

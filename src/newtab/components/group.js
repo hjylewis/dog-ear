@@ -9,8 +9,8 @@ class Group extends React.Component {
     render () {
         return (
             <div
-                className={classNames('group', {
-                    'group--dragover': this.props.dragOver
+                className={classNames('group', 'target', {
+                    'target--dragover': this.props.dragOver
                 })}
             >
                 <GroupHeader

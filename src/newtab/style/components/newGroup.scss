@@ -1,0 +1,18 @@
+.new-group-target {
+    padding: 20px;
+    background-color: rgba(0,0,0,0.05);
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 10px;
+
+    transition-property: height, padding;
+    transition-duration: 0.3s;
+
+    overflow: hidden;
+
+    &:not(.new-group-target--expand) {
+        border: 0;
+        height: 0;
+        padding: 0;
+    }
+}
