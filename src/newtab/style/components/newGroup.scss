@@ -10,7 +10,7 @@
 
     overflow: hidden;
 
-    &:not(.new-group-target--expand) {
+    &:not(.new-group-target--expanded) {
         border: 0;
         height: 0;
         padding: 0;

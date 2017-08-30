@@ -9,9 +9,9 @@ import { ErrorAlert } from './alert';
 import List from './list';
 import Guide from './Guide';
 import ActionBar from './actionBar';
+import GroupingModeDropDown from './groupingModeDropDown';
 
 import DogLogo from '../assets/Dog.svg';
-import Caret from '../assets/Caret.svg';
 
 const PAGE_SIZE = 40;
 
@@ -126,13 +126,8 @@ class App extends React.Component {
         if (error) throw error;
     }
 
-    changeGroupingMode () {
-        // Toggle
-        if (this.state.groupingMode === 'ADDED') {
-            this.setState({groupingMode: 'CATEGORY'});
-        } else {
-            this.setState({groupingMode: 'ADDED'});
-        }
+    changeGroupingMode (mode) {
+        this.setState({groupingMode: mode});
     }
 
     render () {
@@ -153,7 +148,7 @@ class App extends React.Component {
                         <DogLogo className="dog-logo"/>
                         <div>
                             <h1>Your Dog Ears</h1>
-                            <button onClick={this.changeGroupingMode}>{this.state.groupingMode}<Caret className="caret"/></button>
+                            <GroupingModeDropDown mode={this.state.groupingMode} changeMode={this.changeGroupingMode}/>
                         </div>
                     </div>
                 </div>

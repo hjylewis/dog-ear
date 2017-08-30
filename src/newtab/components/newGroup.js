@@ -20,7 +20,7 @@ class NewGroup extends React.Component {
         return (
             <div
                 className={classNames('new-group-target', 'target', {
-                    'new-group-target--expand': this.state.expanded,
+                    'new-group-target--expanded': this.state.expanded,
                     'target--dragover': this.props.dragOver
                 })}
             >

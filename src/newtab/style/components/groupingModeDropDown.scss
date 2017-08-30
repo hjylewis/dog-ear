@@ -1,0 +1,20 @@
+.grouping-mode-dropdown {
+    display: inline-block;
+    position: relative;
+    margin-left: 20px;
+
+    font-size: 11px;
+
+    button {
+        text-transform: uppercase;
+        border: 0;
+        background: transparent;
+        padding: 0;
+        cursor: pointer;
+    }
+
+    ul {
+        position: absolute;
+        left: 0;
+    }
+}
