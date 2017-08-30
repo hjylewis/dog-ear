@@ -2,6 +2,7 @@ import React from 'react';
 import Storage from '../../services/storage/index';
 import TimeGrouping from '../../services/timeGrouping';
 import CategoryGrouping from '../../services/categoryGrouping';
+import settings from '../../services/settings';
 
 
 import { ErrorAlert } from './alert';
@@ -23,7 +24,7 @@ class App extends React.Component {
         this.state = {
             tabs: null,
             errorMessage: null,
-            groupingMode: 'ADDED', // ADDED or CATEGORY
+            groupingMode: settings.groupingMode || 'ADDED', // ADDED or CATEGORY
             selection: {}
         };
 
@@ -40,6 +41,13 @@ class App extends React.Component {
         Storage.onChange(() => {
             this.loadTabs();
         });
+    }
+
+    componentDidUpdate (prevProps, prevState) {
+        if (this.state.groupingMode !== prevState.groupingMode) {
+            settings.groupingMode = this.state.groupingMode;
+            settings.save();
+        }
     }
 
     loadTabs () {
