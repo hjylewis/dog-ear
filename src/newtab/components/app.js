@@ -10,6 +10,7 @@ import Guide from './Guide';
 import ActionBar from './actionBar';
 
 import DogLogo from '../assets/Dog.svg';
+import Caret from '../assets/Caret.svg';
 
 const PAGE_SIZE = 40;
 
@@ -142,8 +143,10 @@ class App extends React.Component {
                     <ErrorAlert message={this.state.errorMessage} closeAlert={this.setErrorMessage.bind(null,null)} />
                     <div className="header-content">
                         <DogLogo className="dog-logo"/>
-                        <h1>Your Dog Ears</h1>
-                        <button onClick={this.changeGroupingMode}>grouping</button>
+                        <div>
+                            <h1>Your Dog Ears</h1>
+                            <button onClick={this.changeGroupingMode}>{this.state.groupingMode}<Caret className="caret"/></button>
+                        </div>
                     </div>
                 </div>
                 <div className="app-content">

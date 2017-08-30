@@ -1,0 +1,21 @@
+<svg width="260" height="159" viewBox="0 0 260 159" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<title>Caret</title>
+<desc>Created using Figma</desc>
+<g id="Canvas" transform="translate(-1097 199)">
+<clipPath id="clip-0" clip-rule="evenodd">
+<path d="M 1097 -199L 1357 -199L 1357 -40L 1097 -40L 1097 -199Z" fill="#FFFFFF"/>
+</clipPath>
+<g id="Caret" clip-path="url(#clip-0)">
+<g id="Vector 7">
+<use xlink:href="#path0_stroke" transform="translate(1228 -172)"/>
+</g>
+<g id="Vector 7">
+<use xlink:href="#path1_stroke" transform="translate(1123 -172)"/>
+</g>
+</g>
+</g>
+<defs>
+<path id="path0_stroke" d="M 115.414 13.8649C 123.071 5.90427 122.826 -6.75664 114.865 -14.414C 106.904 -22.0714 94.2434 -21.8256 86.586 -13.8649L 115.414 13.8649ZM -14.414 91.1351C -22.0714 99.0957 -21.8256 111.757 -13.8649 119.414C -5.90427 127.071 6.75664 126.826 14.414 118.865L -14.414 91.1351ZM 86.586 -13.8649L -14.414 91.1351L 14.414 118.865L 115.414 13.8649L 86.586 -13.8649Z"/>
+<path id="path1_stroke" d="M 14.1421 -14.1421C 6.33165 -21.9526 -6.33165 -21.9526 -14.1421 -14.1421C -21.9526 -6.33165 -21.9526 6.33165 -14.1421 14.1421L 14.1421 -14.1421ZM 90.8579 119.142C 98.6684 126.953 111.332 126.953 119.142 119.142C 126.953 111.332 126.953 98.6684 119.142 90.8579L 90.8579 119.142ZM -14.1421 14.1421L 90.8579 119.142L 119.142 90.8579L 14.1421 -14.1421L -14.1421 14.1421Z"/>
+</defs>
+</svg>
