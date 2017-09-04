@@ -34,9 +34,20 @@ DeleteBtn.propTypes = {
 };
 
 class CloseBtn extends React.Component {
+    onKeyUp (e) {
+        if (e.keyCode === 13) {
+            this.props.action();
+        }
+    }
+
     render () {
         return (
-            <CloseIcon className={classNames('close-btn')} onClick={this.props.action} />
+            <CloseIcon
+                tabIndex="0"
+                className={classNames('close-btn')}
+                onKeyUp={this.onKeyUp.bind(this)}
+                onClick={this.props.action}
+            />
         );
     }
 }

@@ -9,7 +9,7 @@
 
     &:not(.no-highlight) {
         &:hover {
-            background-color: rgba(0, 0, 0, 0.05);
+            background-color: $hover-color;
         }
 
         .tab-info {
