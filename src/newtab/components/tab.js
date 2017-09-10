@@ -17,8 +17,10 @@ class Icon extends React.Component {
         this.props.select();
     }
 
-    onKeyUp ({keyCode}) {
-        if (keyCode === 13) {
+    onKeyUp (e) {
+        e.stopPropagation();
+
+        if (e.keyCode === 13) {
             this.props.select();
         }
     }
