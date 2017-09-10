@@ -51,6 +51,19 @@ class App extends React.Component {
     }
 
     loadTabs () {
+        // TODO: Remove this hotfix
+        // once storage is changed
+        if (this.state.groupingMode === 'CATEGORY') {
+            Storage.getRecentTabs(500).then((tabs) => {
+                this.setState({
+                    tabs: tabs
+                });
+                this.tabNumber = tabs.length;
+            }).catch((error) => this.setErrorMessage(error));
+            return;
+        }
+
+
         Storage.getRecentTabs(this.tabNumber).then((tabs) => {
             this.setState({
                 tabs: tabs
