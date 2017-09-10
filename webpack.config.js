@@ -3,7 +3,7 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        'newtab/bundle.js': './src/newtab/index.js',
+        'newtab/bundle.js': ['wicg-focus-ring', './src/newtab/index.js'],
         'popup/bundle.js': './src/popup/index.js'
     },
 

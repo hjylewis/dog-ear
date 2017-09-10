@@ -11,6 +11,10 @@
         background: transparent;
         padding: 0;
         cursor: pointer;
+
+        &:focus:not(.focus-ring) {
+            outline-width: 0;
+        }
     }
 
     ul {

@@ -52,6 +52,7 @@
     "classnames": "^2.2.5",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "timeago.js": "^2.0.4"
+    "timeago.js": "^2.0.4",
+    "wicg-focus-ring": "^2.0.1"
   }
 }
