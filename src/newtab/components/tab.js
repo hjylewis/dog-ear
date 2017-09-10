@@ -10,17 +10,25 @@ class Icon extends React.Component {
         super(props);
 
         this.select = this.select.bind(this);
+        this.onKeyUp = this.onKeyUp.bind(this);
     }
     select (e) {
         e.stopPropagation();
         this.props.select();
     }
 
+    onKeyUp ({keyCode}) {
+        if (keyCode === 13) {
+            this.props.select();
+        }
+    }
+
     render () {
         return (
             <span
+                tabIndex="0"
                 className={classNames({ 'icon': true, 'selected': this.props.selected })}
-                onClick={this.select}
+                onClick={this.select} onKeyUp={this.onKeyUp}
             >
                 {this.props.favicon ?
                     <img src={this.props.favicon} className={classNames('favicon')}/> :
@@ -44,6 +52,7 @@ class Tab extends React.Component {
         super(props);
 
         this.onDragStart = this.onDragStart.bind(this);
+        this.onKeyUp = this.onKeyUp.bind(this);
     }
 
     onDragStart (event) {
@@ -53,16 +62,24 @@ class Tab extends React.Component {
         event.dataTransfer.setData('text/plain', this.props.data.title);
     }
 
+    onKeyUp ({keyCode}) {
+        if (keyCode === 13) {
+            this.props.openTab();
+        }
+    }
+
     render () {
         return (
             <div
+                tabIndex="0"
                 draggable={this.props.draggable}
                 onDragStart={this.onDragStart}
                 className={classNames({
                     'tab': true,
                     'no-highlight': !this.props.openTab
-                })
-            } >
+                })}
+                onKeyUp={this.onKeyUp}
+            >
                 <Icon
                     favicon={this.props.data.favicon}
                     selected={this.props.selected}
