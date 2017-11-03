@@ -22,5 +22,6 @@ module.exports = Merge(CommonConfig, {
       comments: false,
     }),
   ],
+  watch: false,
   devtool: false,
 });

@@ -61,8 +61,7 @@ gulp.task('package', function() {
     .pipe(gulp.dest('./releases'));
 });
 
-gulp.task('watch', function() {
-  gulp.watch('src/**/*[.js|.scss]', ['webpack']);
+gulp.task('watch', ['copy', 'webpack'], function() {
   gulp.watch('src/**/*.html', ['copy']);
 });
 
@@ -70,7 +69,7 @@ gulp.task(
   'build',
   gulpSequence(['cleanup', 'updateVersion'], ['copy', 'webpack'])
 );
-gulp.task('development', gulpSequence('set-development', 'build', 'watch'));
+gulp.task('development', gulpSequence('set-development', 'watch'));
 gulp.task('production', gulpSequence('set-production', 'build'));
 gulp.task('publish', gulpSequence('production', 'package'));
 
