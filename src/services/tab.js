@@ -2,52 +2,52 @@ import Storage from './storage/index';
 import Error from './error';
 
 class Tab {
-    constructor ({url, favicon, added, title, category}) {
-        this.title = title;
-        this.url = url;
-        this.favicon = favicon;
-        this.added = added;
-        this.category = category;
+  constructor({ url, favicon, added, title, category }) {
+    this.title = title;
+    this.url = url;
+    this.favicon = favicon;
+    this.added = added;
+    this.category = category;
 
-        // Make url (the id) readonly
-        Object.defineProperty(this, 'url', {
-            writable: false
-        });
+    // Make url (the id) readonly
+    Object.defineProperty(this, 'url', {
+      writable: false,
+    });
+  }
+
+  static create(config) {
+    if (config === undefined) {
+      return undefined;
     }
 
-    static create (config) {
-        if (config === undefined) {
-            return undefined;
-        }
+    let tab = new Tab(config);
 
-        let tab = new Tab(config);
-
-        if (!tab.url) {
-            throw Error.TAB_NO_URL();
-        }
-
-        if (!tab.added) {
-            tab.added = Date.now();
-        }
-
-        return tab;
+    if (!tab.url) {
+      throw Error.TAB_NO_URL();
     }
 
-    static get (id) {
-        return Storage.getTab(id);
+    if (!tab.added) {
+      tab.added = Date.now();
     }
 
-    add () {
-        return Storage.addTab(this);
-    }
+    return tab;
+  }
 
-    update () {
-        return Storage.updateTab(this);
-    }
+  static get(id) {
+    return Storage.getTab(id);
+  }
 
-    remove () {
-        return Storage.removeTab(this);
-    }
+  add() {
+    return Storage.addTab(this);
+  }
+
+  update() {
+    return Storage.updateTab(this);
+  }
+
+  remove() {
+    return Storage.removeTab(this);
+  }
 }
 
 export default Tab;
