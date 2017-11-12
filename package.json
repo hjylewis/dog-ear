@@ -9,6 +9,7 @@
     "production": "gulp production",
     "publish": "gulp publish",
     "precommit": "lint-staged",
+    "prepush": "npm test",
     "test":
       "NODE_ENV=testing ./node_modules/mocha/bin/mocha --recursive --compilers js:babel-core/register"
   },
