@@ -14,10 +14,11 @@
 
         .tab-info {
             cursor: pointer;
+
         }
     }
 
-    span {
+    span, a {
         margin-right: 5px;
 
         white-space: nowrap;
@@ -101,7 +102,8 @@ $icon-size: 21.25px;
 
 .tab-info {
     flex: 1 1 auto;
-
+    text-decoration: initial;
+    color: initial;
     .title {
 
     }

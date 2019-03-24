@@ -56,7 +56,6 @@ class Tab extends React.Component {
     super(props);
 
     this.onDragStart = this.onDragStart.bind(this);
-    this.onKeyUp = this.onKeyUp.bind(this);
   }
 
   onDragStart(event) {
@@ -69,12 +68,6 @@ class Tab extends React.Component {
     event.dataTransfer.setData('text/plain', this.props.data.title);
   }
 
-  onKeyUp({ keyCode }) {
-    if (keyCode === 13) {
-      this.props.openTab();
-    }
-  }
-
   render() {
     return (
       <div
@@ -83,19 +76,22 @@ class Tab extends React.Component {
         onDragStart={this.onDragStart}
         className={classNames({
           tab: true,
-          'no-highlight': !this.props.openTab,
+          'no-highlight': !this.props.removeTab,
         })}
-        onKeyUp={this.onKeyUp}
       >
         <Icon
           favicon={this.props.data.favicon}
           selected={this.props.selected}
           select={this.props.select}
         />
-        <span className={classNames('tab-info')} onClick={this.props.openTab}>
+        <a
+          className={classNames('tab-info')}
+          onClick={this.props.removeTab}
+          href={this.props.data.url}
+        >
           <span className={classNames('title')}>{this.props.data.title}</span>
           <span className={classNames('url')}>{this.props.data.url}</span>
-        </span>
+        </a>
       </div>
     );
   }
@@ -104,7 +100,7 @@ class Tab extends React.Component {
 Tab.propTypes = {
   data: React.PropTypes.object.isRequired,
   draggable: React.PropTypes.bool,
-  openTab: React.PropTypes.func,
+  removeTab: React.PropTypes.func,
   selected: React.PropTypes.bool.isRequired,
   select: React.PropTypes.func.isRequired,
 };
