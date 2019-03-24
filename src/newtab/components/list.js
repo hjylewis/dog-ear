@@ -85,8 +85,10 @@ class List extends React.Component {
           <Tab
             data={tab}
             selected={tab.url in this.props.selection}
-            openTab={
-              this.props.openTabs ? this.props.openTabs.bind(null, tab) : null
+            removeTab={
+              this.props.removeTabs
+                ? this.props.removeTabs.bind(null, tab)
+                : null
             }
             select={this.props.select.bind(null, tab)}
           />
@@ -107,8 +109,10 @@ class List extends React.Component {
               data={tab}
               draggable={this.props.customizable}
               selected={tab.url in this.props.selection}
-              openTab={
-                this.props.openTabs ? this.props.openTabs.bind(null, tab) : null
+              removeTab={
+                this.props.removeTabs
+                  ? this.props.removeTabs.bind(null, tab)
+                  : null
               }
               select={this.props.select.bind(null, tab)}
             />
@@ -152,7 +156,7 @@ class List extends React.Component {
 List.propTypes = {
   groups: React.PropTypes.arrayOf(React.PropTypes.object).isRequired, // Array of groups
   customizable: React.PropTypes.bool,
-  openTabs: React.PropTypes.func, // Function that opens tab
+  removeTabs: React.PropTypes.func, // Function that removes tab
 
   select: React.PropTypes.func.isRequired, // Function that selects or unselects tab
   selection: React.PropTypes.object.isRequired, // Selected tabs

@@ -1,6 +1,5 @@
 .alert {
-    --alert-color: $primary;
-    background-color: var(--alert-color);
+    background-color: $primary;
 
     color: white;
     padding: 10px;
@@ -11,5 +10,5 @@
 }
 
 .alert--error {
-    --alert-color: $warning;
+    background-color: $warning;
 }

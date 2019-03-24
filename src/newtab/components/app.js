@@ -30,6 +30,7 @@ class App extends React.Component {
     this.loadMore = this.loadMore.bind(this);
     this.onScroll = this.onScroll.bind(this);
     this.openTabs = this.openTabs.bind(this);
+    this.removeTabs = this.removeTabs.bind(this);
     this.select = this.select.bind(this);
     this.setErrorMessage = this.setErrorMessage.bind(this);
     this.changeGroupingMode = this.changeGroupingMode.bind(this);
@@ -87,6 +88,16 @@ class App extends React.Component {
     if (distanceFromBottom < 50) {
       this.loadMore();
     }
+  }
+
+  removeTabs(tabs) {
+    if (!Array.isArray(tabs)) {
+      tabs = [tabs];
+    }
+
+    tabs.forEach(tab => {
+      tab.remove().catch(error => this.setErrorMessage(error));
+    });
   }
 
   openTabs(tabs) {
@@ -185,7 +196,7 @@ class App extends React.Component {
           <List
             groups={groups}
             customizable={this.state.groupingMode === 'CATEGORY'}
-            openTabs={this.openTabs}
+            removeTabs={this.removeTabs}
             select={this.select}
             selection={this.state.selection}
           />
