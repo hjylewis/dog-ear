@@ -16,6 +16,5 @@ npm run production
 ```
 
 ## Publish
-```
-npm run publish
-```
+1. `npm version <version>`
+2. `npm run publish`
