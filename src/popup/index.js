@@ -2,8 +2,17 @@ import Tab from '../services/tab';
 
 const NEWTAB_URL = 'chrome://newtab';
 
-// Browser Action Click
-chrome.browserAction.onClicked.addListener(tab => {
+chrome.commands.onCommand.addListener(function(command) {
+  if (command === 'dog-ear-tab') {
+    chrome.tabs.query({ currentWindow: true, active: true }, tabs => {
+      if (tabs.length === 1) {
+        dogEarTab(tabs[0]);
+      }
+    });
+  }
+});
+
+function dogEarTab(tab) {
   if (!tab.id || tab.id === chrome.tabs.TAB_ID_NONE) {
     return;
   }
@@ -32,6 +41,11 @@ chrome.browserAction.onClicked.addListener(tab => {
       addAndRemoveTab();
     }
   });
+}
+
+// Browser Action Click
+chrome.browserAction.onClicked.addListener(tab => {
+  dogEarTab(tab);
 });
 
 // Add menu items
