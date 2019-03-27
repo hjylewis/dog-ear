@@ -3,9 +3,14 @@ import Error from './error';
 
 class Tab {
   constructor({ url, favicon, added, title, category }) {
-    this.title = title;
     this.url = url;
-    this.favicon = favicon;
+    if (title.length < 500) {
+      this.title = title;
+    }
+
+    if (favicon && favicon.length < 500) {
+      this.favicon = favicon;
+    }
     this.added = added;
     this.category = category;
 
