@@ -4,7 +4,7 @@ import Error from './error';
 class Tab {
   constructor({ url, favicon, added, title, category }) {
     this.url = url;
-    if (title.length < 500) {
+    if (title && title.length < 500) {
       this.title = title;
     }
 
